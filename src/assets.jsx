@@ -321,8 +321,47 @@ data[28].thumbnail.regular.large = missionSaturnLarge;
 
 import logo from './assets/logo.svg';
 
+import iconBookmarkEmpty from './assets/icon-bookmark-empty.svg';
+import iconBookmarkFull from './assets/icon-bookmark-full.svg';
+
+import iconCategoryMovie from './assets/icon-category-movie.svg';
+import iconCategoryTv from './assets/icon-category-tv.svg';
+
+import iconNavBookmark from './assets/icon-nav-bookmark.svg';
+import iconNavHome from './assets/icon-nav-home.svg';
+import iconNavMovies from './assets/icon-nav-movies.svg';
+import iconNavTvSeries from './assets/icon-nav-tv-series.svg';
+
+import iconPlay from './assets/icon-play.svg';
+import iconSearch from './assets/icon-search.svg';
+import imageAvatar from './assets/image-avatar.png';
+
+const svgNavHome = (
+    <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M8 0H1C.4 0 0 .4 0 1v7c0 .6.4 1 1 1h7c.6 0 1-.4 1-1V1c0-.6-.4-1-1-1Zm0 11H1c-.6 0-1 .4-1 1v7c0 .6.4 1 1 1h7c.6 0 1-.4 1-1v-7c0-.6-.4-1-1-1ZM19 0h-7c-.6 0-1 .4-1 1v7c0 .6.4 1 1 1h7c.6 0 1-.4 1-1V1c0-.6-.4-1-1-1Zm0 11h-7c-.6 0-1 .4-1 1v7c0 .6.4 1 1 1h7c.6 0 1-.4 1-1v-7c0-.6-.4-1-1-1Z"
+            fill="#5A698F"
+        />
+    </svg>
+);
+
 const assets = {
     logo,
+    iconBookmarkEmpty,
+    iconBookmarkFull,
+    iconCategoryMovie,
+    iconCategoryTv,
+    iconNavBookmark,
+    iconNavHome,
+    iconNavMovies,
+    iconNavTvSeries,
+    iconPlay,
+    iconSearch,
+    imageAvatar,
+
+    svgNavHome,
 };
 
 export { assets };
+
+// // // // // // // // // // // // // // // // // // // //
