@@ -1,0 +1,22 @@
+:root {
+    --color-red: hsla(0, 97%, 63%, 1);
+    --color-dark-blue: hsla(224, 30%, 9%, 1);
+    --color-grey-blue: hsla(223, 23%, 46%, 1);
+    --color-semi-dark-blue: hsla(223, 36%, 13%, 1);
+    --color-white: hsla(0, 0%, 100%, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Outfit', sans-serif;
+}
