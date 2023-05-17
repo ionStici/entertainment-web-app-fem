@@ -318,3 +318,11 @@ data[28].thumbnail.regular.medium = missionSaturnMedium;
 data[28].thumbnail.regular.large = missionSaturnLarge;
 
 // // // // // // // // // // // // // // // // // // // //
+
+import logo from './assets/logo.svg';
+
+const assets = {
+    logo,
+};
+
+export { assets };

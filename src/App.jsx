@@ -1,6 +1,7 @@
-import './assets';
 import './styles/base.scss';
 import './styles/typography.scss';
+
+import { assets } from './assets';
 import data from './data.json';
 
 function App() {
