@@ -5,6 +5,7 @@ import data from './data.json';
 
 import NavigationBar from './components/NavigationBar';
 import SearchForm from './components/Search';
+import Trending from './components/Trending';
 
 function App() {
     const handleNavBarClick = function ({ target }) {
@@ -21,6 +22,8 @@ function App() {
         console.log(event.target.value);
     };
 
+    const trending = data.filter(movie => movie.isTrending);
+
     return (
         <>
             <main>
@@ -29,6 +32,7 @@ function App() {
                     handleClick={handleNavBarClick}
                 />
                 <SearchForm assets={assets} handleSearch={handleSearch} />
+                <Trending assets={assets} trending={trending} />
             </main>
         </>
     );
