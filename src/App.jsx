@@ -2,7 +2,9 @@ import './styles/base.scss';
 import './styles/typography.scss';
 import { assets } from './assets';
 import data from './data.json';
+
 import NavigationBar from './components/NavigationBar';
+import SearchForm from './components/Search';
 
 function App() {
     const handleNavBarClick = function ({ target }) {
@@ -15,6 +17,10 @@ function App() {
         if (target.dataset.type === 'bookmarks') '';
     };
 
+    const handleSearch = function (event) {
+        console.log(event.target.value);
+    };
+
     return (
         <>
             <main>
@@ -22,6 +28,7 @@ function App() {
                     assets={assets}
                     handleClick={handleNavBarClick}
                 />
+                <SearchForm assets={assets} handleSearch={handleSearch} />
             </main>
         </>
     );

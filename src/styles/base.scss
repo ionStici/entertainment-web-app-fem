@@ -17,7 +17,14 @@
     box-sizing: border-box;
 }
 
+button,
+input {
+    font: inherit;
+    color: inherit;
+}
+
 html {
     font-family: 'Outfit', sans-serif;
+    color: var(--color-white);
     background-color: var(--color-dark-blue);
 }
