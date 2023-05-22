@@ -1,30 +1,58 @@
+import React from 'react';
 import styles from './../styles/Trending.module.scss';
 import PropTypes from 'prop-types';
 
 const Trending = function (props) {
-    const handleMouseEnter = function ({ target }) {
+    const trending = props.trending;
+    const assets = props.assets;
+
+    const handleBookmarkMouseOver = function ({ target }) {
         const icon = target.querySelector('img');
+        icon.classList.add(styles.bookmark_button_hover);
 
         if (icon.dataset.isbookmarked === 'false') {
-            icon.src = props.assets.iconBookmarkFull;
+            icon.src = assets.iconBookmarkFull;
         }
 
         if (icon.dataset.isbookmarked === 'true') {
-            icon.src = props.assets.iconBookmarkEmpty;
+            icon.src = assets.iconBookmarkEmpty;
         }
-
-        console.log(icon);
     };
 
-    const handleMouseOut = function ({ target }) {
+    const handleBookmarkMouseOut = function ({ target }) {
         const icon = target.querySelector('img');
+        icon.classList.remove(styles.bookmark_button_hover);
 
         if (!(icon.dataset.isbookmarked === 'false')) {
-            icon.src = props.assets.iconBookmarkFull;
+            icon.src = assets.iconBookmarkFull;
         }
 
         if (!(icon.dataset.isbookmarked === 'true')) {
-            icon.src = props.assets.iconBookmarkEmpty;
+            icon.src = assets.iconBookmarkEmpty;
+        }
+    };
+
+    const [bookmark, updateBookmark] = React.useState(0);
+
+    const handleBookmarkClick = function ({ target }) {
+        const icon = target.querySelector('img');
+        icon.classList.remove(styles.bookmark_button_hover);
+
+        const movie = trending.find(movie => {
+            return movie.title === target.dataset.movie;
+        });
+
+        updateBookmark(prev => prev + 1);
+        bookmark;
+
+        if (movie.isBookmarked === false) {
+            movie.isBookmarked = true;
+            return;
+        }
+
+        if (movie.isBookmarked === true) {
+            movie.isBookmarked = false;
+            return;
         }
     };
 
@@ -35,7 +63,7 @@ const Trending = function (props) {
                     <h1 className={styles.title}>Trending</h1>
 
                     <div className={styles.boxes}>
-                        {props.trending.map((movie, i) => {
+                        {trending.map((movie, i) => {
                             return (
                                 <div className={styles.box} key={i}>
                                     <picture>
@@ -46,12 +74,12 @@ const Trending = function (props) {
                                     </picture>
 
                                     {/* prettier-ignore */}
-                                    <button onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut} className={styles.bookmark_button} aria-label="Bookmark"><img src={movie.isBookmarked ? props.assets.iconBookmarkFull : props.assets.iconBookmarkEmpty} alt="Bookmark" data-isbookmarked={movie.isBookmarked} /></button>
+                                    <button onClick={handleBookmarkClick} onMouseOver={handleBookmarkMouseOver} onMouseOut={handleBookmarkMouseOut} className={styles.bookmark_button} aria-label="Bookmark" data-movie={movie.title}><img src={movie.isBookmarked ? assets.iconBookmarkFull : assets.iconBookmarkEmpty} alt="Bookmark" data-isbookmarked={movie.isBookmarked} /></button>
 
                                     <div className={styles.box_details}>
                                         <p>{movie.year}</p>
                                         {/* prettier-ignore */}
-                                        <p><img src={movie.category === 'Movie' ? props.assets.iconCategoryMovie : props.assets.iconCategoryTv} alt={movie.category} /><span>{movie.category}</span></p>
+                                        <p><img src={movie.category === 'Movie' ? assets.iconCategoryMovie : assets.iconCategoryTv} alt={movie.category} /><span>{movie.category}</span></p>
                                         <p>{movie.rating}</p>
                                     </div>
 
@@ -60,10 +88,7 @@ const Trending = function (props) {
                                     </h2>
 
                                     <div className={styles.play}>
-                                        <img
-                                            src={props.assets.iconPlay}
-                                            alt=""
-                                        />
+                                        <img src={assets.iconPlay} alt="" />
                                         <p>Play</p>
                                     </div>
                                 </div>
