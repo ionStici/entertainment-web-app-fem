@@ -75,6 +75,11 @@ const Movies = function (props) {
 
                                         {/* prettier-ignore */}
                                         <button onClick={handleBookmarkClick} onMouseOver={handleBookmarkMouseOver} onMouseOut={handleBookmarkMouseOut} className={styles.bookmark_button} aria-label="Bookmark" data-movie={movie.title}><img src={movie.isBookmarked ? assets.iconBookmarkFull : assets.iconBookmarkEmpty} alt="Bookmark" data-isbookmarked={movie.isBookmarked} /></button>
+
+                                        <div className={styles.play}>
+                                            <img src={assets.iconPlay} alt="" />
+                                            <p>Play</p>
+                                        </div>
                                     </div>
 
                                     <div className={styles.box_details}>
