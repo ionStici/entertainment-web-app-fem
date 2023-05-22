@@ -378,10 +378,12 @@ const assets = {
     iconBookmarkFull,
     iconCategoryMovie,
     iconCategoryTv,
+
     iconNavBookmark,
     iconNavHome,
     iconNavMovies,
     iconNavTvSeries,
+
     iconPlay,
     iconSearch,
     imageAvatar,
