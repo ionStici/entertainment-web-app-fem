@@ -24,6 +24,7 @@ function App() {
     };
 
     const trending = data.filter(movie => movie.isTrending);
+    const movies = data.filter(movie => !movie.isTrending);
 
     return (
         <>
@@ -31,7 +32,11 @@ function App() {
                 <NavigationBar assets={assets} handleClick={handleClick} />
                 <SearchForm assets={assets} handleSearch={handleSearch} />
                 <Trending assets={assets} trending={trending} />
-                <Movies assets={assets} />
+                <Movies
+                    assets={assets}
+                    movies={movies}
+                    title="Recommended for you"
+                />
             </main>
         </>
     );
