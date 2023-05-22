@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const Trending = function (props) {
     const trending = props.trending;
+
     const assets = props.assets;
 
     const handleBookmarkMouseOver = function ({ target }) {
@@ -56,6 +57,8 @@ const Trending = function (props) {
         }
     };
 
+    if (!trending) return null;
+
     return (
         <>
             <section className={styles.section}>
@@ -103,7 +106,7 @@ const Trending = function (props) {
 
 Trending.propTypes = {
     assets: PropTypes.object,
-    trending: PropTypes.array,
+    trending: PropTypes.any,
 };
 
 export default Trending;
