@@ -2,7 +2,31 @@ import styles from './../styles/Trending.module.scss';
 import PropTypes from 'prop-types';
 
 const Trending = function (props) {
-    console.log(props.trending);
+    const handleMouseEnter = function ({ target }) {
+        const icon = target.querySelector('img');
+
+        if (icon.dataset.isbookmarked === 'false') {
+            icon.src = props.assets.iconBookmarkFull;
+        }
+
+        if (icon.dataset.isbookmarked === 'true') {
+            icon.src = props.assets.iconBookmarkEmpty;
+        }
+
+        console.log(icon);
+    };
+
+    const handleMouseOut = function ({ target }) {
+        const icon = target.querySelector('img');
+
+        if (!(icon.dataset.isbookmarked === 'false')) {
+            icon.src = props.assets.iconBookmarkFull;
+        }
+
+        if (!(icon.dataset.isbookmarked === 'true')) {
+            icon.src = props.assets.iconBookmarkEmpty;
+        }
+    };
 
     return (
         <>
@@ -22,7 +46,7 @@ const Trending = function (props) {
                                     </picture>
 
                                     {/* prettier-ignore */}
-                                    <button className={styles.bookmark_button} aria-label="Bookmark"><img src={movie.isBookmarked ? props.assets.iconBookmarkFull : props.assets.iconBookmarkEmpty} alt="Bookmark" /></button>
+                                    <button onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut} className={styles.bookmark_button} aria-label="Bookmark"><img src={movie.isBookmarked ? props.assets.iconBookmarkFull : props.assets.iconBookmarkEmpty} alt="Bookmark" data-isbookmarked={movie.isBookmarked} /></button>
 
                                     <div className={styles.box_details}>
                                         <p>{movie.year}</p>
@@ -34,6 +58,14 @@ const Trending = function (props) {
                                     <h2 className={styles.movie_title}>
                                         {movie.title}
                                     </h2>
+
+                                    <div className={styles.play}>
+                                        <img
+                                            src={props.assets.iconPlay}
+                                            alt=""
+                                        />
+                                        <p>Play</p>
+                                    </div>
                                 </div>
                             );
                         })}
