@@ -6,9 +6,10 @@ import data from './data.json';
 import NavigationBar from './components/NavigationBar';
 import SearchForm from './components/Search';
 import Trending from './components/Trending';
+import Movies from './components/Movies';
 
 function App() {
-    const handleNavBarClick = function ({ target }) {
+    const handleClick = function ({ target }) {
         if (target.dataset.type === 'home') '';
 
         if (target.dataset.type === 'movies') '';
@@ -27,12 +28,10 @@ function App() {
     return (
         <>
             <main>
-                <NavigationBar
-                    assets={assets}
-                    handleClick={handleNavBarClick}
-                />
+                <NavigationBar assets={assets} handleClick={handleClick} />
                 <SearchForm assets={assets} handleSearch={handleSearch} />
                 <Trending assets={assets} trending={trending} />
+                <Movies assets={assets} />
             </main>
         </>
     );
