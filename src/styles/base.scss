@@ -45,11 +45,10 @@ body {
 main {
     @media only screen and (min-width: 1100px) {
         display: grid;
+        column-gap: 36px;
 
         grid-template-columns: 96px 1fr;
         grid-template-rows: 97px 335px 1fr;
-
-        column-gap: 36px;
 
         margin-top: 32px;
         margin-left: 32px;
