@@ -7,14 +7,8 @@ const NavigationBar = function () {
         <>
             <nav className={styles.nav}>
                 <div className={styles.wrapper}>
-                    <Link to="/">
-                        <img
-                            className={styles.logo}
-                            src={assets.logo}
-                            alt="logo"
-                            width="25"
-                            height="20"
-                        />
+                    <Link className={styles.logo_link} to="/">
+                        <img src={assets.logo} alt="logo" />
                     </Link>
 
                     <div className={styles.btns_wrapper}>
@@ -25,18 +19,12 @@ const NavigationBar = function () {
                         {/* prettier-ignore */}
                         <NavLink className={({ isActive }) => isActive ? `${styles.btn} ${styles.active}` : `${styles.btn}`} to="/tvseries">{assets.svgNavTvSeries}</NavLink>
                         {/* prettier-ignore */}
-                        <NavLink className={({ isActive }) => isActive ? `${styles.btn} ${styles.active}` : `${styles.btn}`} to="bookmarks">{assets.svgNavBookmark}</NavLink>
+                        <NavLink className={({ isActive }) => isActive ? `${styles.btn} ${styles.active}` : `${styles.btn}`} to="/bookmarks">{assets.svgNavBookmark}</NavLink>
                     </div>
 
-                    <button className={styles.profile_btn}>
-                        <img
-                            className={styles.profile_img}
-                            src={assets.imageAvatar}
-                            alt="User Image"
-                            width="24"
-                            height="24"
-                        />
-                    </button>
+                    <Link className={styles.profile_btn} to="/profile">
+                        <img src={assets.imageAvatar} alt="User Image" />
+                    </Link>
                 </div>
             </nav>
         </>

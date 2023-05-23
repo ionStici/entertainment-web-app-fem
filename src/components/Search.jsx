@@ -1,5 +1,5 @@
 import styles from './../styles/SearchBar.module.scss';
-import PropTypes from 'prop-types';
+import { assets } from './../assets';
 
 const SearchForm = function (props) {
     return (
@@ -14,7 +14,7 @@ const SearchForm = function (props) {
                     <label className={styles.label} htmlFor="Search">
                         <img
                             className={styles.icon}
-                            src={props.assets.iconSearch}
+                            src={assets.iconSearch}
                             alt="Search"
                         />
                         <input
@@ -30,11 +30,6 @@ const SearchForm = function (props) {
             </div>
         </>
     );
-};
-
-SearchForm.propTypes = {
-    assets: PropTypes.object,
-    handleSearch: PropTypes.func,
 };
 
 export default SearchForm;

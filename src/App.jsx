@@ -1,27 +1,55 @@
 import './styles/base.scss';
-
-import { assets } from './assets';
-import data from './data.json';
-
-import React from 'react';
-import navStyles from './styles/NavigationBar.module.scss';
-
-import NavigationBar from './components/NavigationBar';
-import SearchForm from './components/Search';
-import Trending from './components/Trending';
-import Movies from './components/Movies';
-
-import Home from './pages/Home';
-
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import HomePage from './pages/Home';
+import MoviesPage from './pages/Movies';
+import TvSeriesPage from './pages/TvSeriesPage';
+import BookmarksPage from './pages/Bookmarks';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Home />,
+        element: <HomePage />,
+    },
+    {
+        path: '/movies',
+        element: <MoviesPage />,
+    },
+    {
+        path: '/tvseries',
+        element: <TvSeriesPage />,
+    },
+    {
+        path: '/bookmarks',
+        element: <BookmarksPage />,
+    },
+    {
+        path: '/profile',
+        element: <HomePage />,
+    },
+    {
+        path: '/profile/:user',
+        element: <HomePage />,
+    },
+    {
+        path: '/:title',
+        element: <HomePage />,
     },
 ]);
 
+function App() {
+    return (
+        <main>
+            <RouterProvider router={router} />
+        </main>
+    );
+}
+
+export default App;
+
+// // // // // // // // // // // // // // // // // // // //
+
+// import navStyles from './styles/NavigationBar.module.scss';
 // function App() {
 //     const [content, setContent] = React.useState(
 //         data.filter(movie => !movie.isTrending)
@@ -80,13 +108,3 @@ const router = createBrowserRouter([
 //         </>
 //     );
 // }
-
-function App() {
-    return (
-        <main>
-            <RouterProvider router={router} />
-        </main>
-    );
-}
-
-export default App;
