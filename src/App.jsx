@@ -5,11 +5,13 @@ import HomePage from './pages/Home';
 import MoviesPage from './pages/Movies';
 import TvSeriesPage from './pages/TvSeriesPage';
 import BookmarksPage from './pages/Bookmarks';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <HomePage />,
+        errorElement: <ErrorPage />,
     },
     {
         path: '/movies',
@@ -29,10 +31,6 @@ const router = createBrowserRouter([
     },
     {
         path: '/profile/:user',
-        element: <HomePage />,
-    },
-    {
-        path: '/:title',
         element: <HomePage />,
     },
 ]);
