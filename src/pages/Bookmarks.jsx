@@ -1,7 +1,7 @@
 import NavigationBar from '../components/NavigationBar';
 import SearchForm from '../components/Search';
 import Movies from '../components/Movies';
-
+import moviesStyles from './../styles/Movies.module.scss';
 import React from 'react';
 import { assets } from './../assets';
 import data from './../data.json';
@@ -15,18 +15,46 @@ const BookmarksPage = function () {
         return movie.isBookmarked && movie.category === 'Movie';
     });
 
-    const tvSeriesTitle = 'Bookmaked TV Series';
+    const tvSerTitle = 'Bookmaked TV Series';
 
     const tvSeries = data.filter(movie => {
         return movie.isBookmarked && movie.category === 'TV Series';
     });
 
+    const update = () => updatePage(prev => prev + 1);
+
     return (
         <>
             <NavigationBar />
             <SearchForm />
-            <Movies assets={assets} movies={movies} title={moviesTitle} />
-            <Movies assets={assets} movies={tvSeries} title={tvSeriesTitle} />
+
+            {movies[0] ? (
+                <Movies
+                    assets={assets}
+                    movies={movies}
+                    title={moviesTitle}
+                    update={update}
+                />
+            ) : (
+                ''
+            )}
+
+            {tvSeries[0] ? (
+                <div className={moviesStyles.spaceBetweenBlocks}></div>
+            ) : (
+                ''
+            )}
+
+            {tvSeries[0] ? (
+                <Movies
+                    assets={assets}
+                    movies={tvSeries}
+                    title={tvSerTitle}
+                    update={update}
+                />
+            ) : (
+                ''
+            )}
         </>
     );
 };

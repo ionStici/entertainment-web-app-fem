@@ -30,6 +30,18 @@ html {
     background-color: var(--color-dark-blue);
 }
 
+body {
+    padding-bottom: 61px;
+
+    @media only screen and (min-width: 768px) {
+        padding-bottom: 56px;
+    }
+
+    @media only screen and (min-width: 1100px) {
+        padding-bottom: 52px;
+    }
+}
+
 main {
     @media only screen and (min-width: 1100px) {
         display: grid;

@@ -18,6 +18,7 @@ const Movies = function (props) {
             icon.src = assets.iconBookmarkEmpty;
         }
     };
+
     const handleBookmarkMouseOut = function ({ target }) {
         const icon = target.querySelector('img');
         icon.classList.remove(styles.bookmark_button_hover);
@@ -30,7 +31,9 @@ const Movies = function (props) {
             icon.src = assets.iconBookmarkEmpty;
         }
     };
+
     const [bookmark, updateBookmark] = React.useState(0);
+
     const handleBookmarkClick = function ({ target }) {
         const icon = target.querySelector('img');
         icon.classList.remove(styles.bookmark_button_hover);
@@ -41,6 +44,8 @@ const Movies = function (props) {
 
         updateBookmark(prev => prev + 1);
         bookmark;
+
+        if (props.update) props.update();
 
         if (movie.isBookmarked === false) {
             movie.isBookmarked = true;
