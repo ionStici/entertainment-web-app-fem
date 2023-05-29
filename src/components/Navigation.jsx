@@ -1,12 +1,8 @@
 import styles from './../styles/NavigationBar.module.scss';
 import { NavLink, Link } from 'react-router-dom';
 import { assets } from '../assets';
-import currentUser from '../UserData';
 
 const NavigationBar = function () {
-    const user = currentUser[0];
-    const name = user.fullName.split(' ')[0].toLowerCase();
-
     return (
         <>
             <nav className={styles.nav}>
@@ -26,10 +22,7 @@ const NavigationBar = function () {
                         <NavLink className={({ isActive }) => isActive ? `${styles.btn} ${styles.active}` : `${styles.btn}`} to="/bookmarks">{assets.svgNavBookmark}</NavLink>
                     </div>
 
-                    <Link
-                        className={styles.profile_btn}
-                        to={`/profile/${name}`}
-                    >
+                    <Link className={styles.profile_btn} to="/profile">
                         <img src={assets.imageAvatar} alt="User Image" />
                     </Link>
                 </div>

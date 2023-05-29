@@ -1,10 +1,11 @@
 import './styles/base.scss';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import HomePage from './pages/Home';
-import MoviesPage from './pages/Movies';
+import HomePage from './pages/HomePage';
+import MoviesPage from './pages/MoviesPage';
 import TvSeriesPage from './pages/TvSeriesPage';
-import BookmarksPage from './pages/Bookmarks';
+import BookmarksPage from './pages/BookmarksPage';
+import ProfilePage from './pages/ProfilePage';
 import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
@@ -27,11 +28,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/profile',
-        element: <HomePage />,
-    },
-    {
-        path: '/profile/:user',
-        element: <HomePage />,
+        element: <ProfilePage />,
     },
 ]);
 

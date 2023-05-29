@@ -14,6 +14,10 @@ const ErrorPage = function () {
         flexDirection: 'column',
         alignItems: 'center',
         fontSize: '18px',
+        width: '240px',
+        backgroundColor: 'var(--color-semi-dark-blue)',
+        padding: '8px 32px 24px 32px',
+        borderRadius: '8px',
     };
 
     const link = {

@@ -1,10 +1,10 @@
-import NavigationBar from '../components/NavigationBar';
+import NavigationBar from '../components/Navigation';
 import SearchForm from '../components/Search';
 import Trending from '../components/Trending';
-import Movies from '../components/Movies';
+import Movies from '../components/Media';
 
-import data from './../data.json';
-import { assets } from './../assets';
+import data from '../data.json';
+import { assets } from '../assets';
 
 const HomePage = function () {
     const trending = data.filter(movie => movie.isTrending);

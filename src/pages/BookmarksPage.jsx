@@ -1,10 +1,10 @@
-import NavigationBar from '../components/NavigationBar';
+import NavigationBar from '../components/Navigation';
 import SearchForm from '../components/Search';
-import Movies from '../components/Movies';
+import Movies from '../components/Media';
 import moviesStyles from './../styles/Movies.module.scss';
 import React from 'react';
-import { assets } from './../assets';
-import data from './../data.json';
+import { assets } from '../assets';
+import data from '../data.json';
 
 const BookmarksPage = function () {
     const [page, updatePage] = React.useState(0);
