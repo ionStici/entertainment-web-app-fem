@@ -109,7 +109,7 @@
     }
 
     &:hover path {
-        fill: var(--color-white);
+        fill: var(--color-white) !important;
     }
 }
 

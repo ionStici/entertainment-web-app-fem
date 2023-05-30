@@ -17,7 +17,8 @@ const SearchPage = function (props) {
             return movie.title.toLowerCase().includes(query);
         });
 
-        setTitle(`Found ${newMedia.length} results for '${target.value}'`);
+        // prettier-ignore
+        setTitle(`Found ${newMedia.length} results ${newMedia[0] ? `for '${target.value}'` : ''}`);
         setMedia(newMedia);
     };
 
