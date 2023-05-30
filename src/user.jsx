@@ -1,6 +1,8 @@
 import data from './data.json';
+import { cloneDeep } from 'lodash';
 
 let currentUser;
+let defaultData;
 
 const users = [
     {
@@ -12,4 +14,7 @@ const users = [
     },
 ];
 
-export default currentUser;
+currentUser = cloneDeep(data);
+defaultData = cloneDeep(data);
+
+export { currentUser, defaultData };

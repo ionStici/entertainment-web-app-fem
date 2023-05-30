@@ -5,7 +5,6 @@ import HomePage from './pages/HomePage';
 import MoviesPage from './pages/MoviesPage';
 import TvSeriesPage from './pages/TvSeriesPage';
 import BookmarksPage from './pages/BookmarksPage';
-import ProfilePage from './pages/ProfilePage';
 import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
@@ -26,18 +25,10 @@ const router = createBrowserRouter([
         path: '/bookmarks',
         element: <BookmarksPage />,
     },
-    {
-        path: '/profile',
-        element: <ProfilePage />,
-    },
 ]);
 
 function App() {
-    return (
-        <main>
-            <RouterProvider router={router} />
-        </main>
-    );
+    return <RouterProvider router={router} />;
 }
 
 export default App;

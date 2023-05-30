@@ -373,7 +373,6 @@ const svgNavTvSeries = (
 );
 
 const assets = {
-    logo,
     iconBookmarkEmpty,
     iconBookmarkFull,
     iconCategoryMovie,
@@ -384,14 +383,15 @@ const assets = {
     iconNavMovies,
     iconNavTvSeries,
 
-    iconPlay,
-    iconSearch,
-    imageAvatar,
-
     svgNavHome,
     svgNavBookmark,
     svgNavMovies,
     svgNavTvSeries,
+
+    logo,
+    iconPlay,
+    iconSearch,
+    imageAvatar,
 };
 
 export { assets };

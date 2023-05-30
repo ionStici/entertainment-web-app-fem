@@ -11,9 +11,11 @@ const MoviesPage = function () {
 
     return (
         <>
-            <NavigationBar />
-            <SearchForm />
-            <Movies assets={assets} movies={movies} title={title} />
+            <main>
+                <NavigationBar />
+                <SearchForm />
+                <Movies assets={assets} movies={movies} title={title} />
+            </main>
         </>
     );
 };

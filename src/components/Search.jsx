@@ -1,4 +1,4 @@
-import styles from './../styles/SearchBar.module.scss';
+import styles from './../styles/Search.module.scss';
 import { assets } from './../assets';
 
 const SearchForm = function (props) {

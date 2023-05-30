@@ -25,36 +25,38 @@ const BookmarksPage = function () {
 
     return (
         <>
-            <NavigationBar />
-            <SearchForm />
+            <main>
+                <NavigationBar />
+                <SearchForm />
 
-            {movies[0] ? (
-                <Movies
-                    assets={assets}
-                    movies={movies}
-                    title={moviesTitle}
-                    update={update}
-                />
-            ) : (
-                ''
-            )}
+                {movies[0] ? (
+                    <Movies
+                        assets={assets}
+                        movies={movies}
+                        title={moviesTitle}
+                        update={update}
+                    />
+                ) : (
+                    ''
+                )}
 
-            {tvSeries[0] ? (
-                <div className={moviesStyles.spaceBetweenBlocks}></div>
-            ) : (
-                ''
-            )}
+                {tvSeries[0] ? (
+                    <div className={moviesStyles.spaceBetweenBlocks}></div>
+                ) : (
+                    ''
+                )}
 
-            {tvSeries[0] ? (
-                <Movies
-                    assets={assets}
-                    movies={tvSeries}
-                    title={tvSerTitle}
-                    update={update}
-                />
-            ) : (
-                ''
-            )}
+                {tvSeries[0] ? (
+                    <Movies
+                        assets={assets}
+                        movies={tvSeries}
+                        title={tvSerTitle}
+                        update={update}
+                    />
+                ) : (
+                    ''
+                )}
+            </main>
         </>
     );
 };

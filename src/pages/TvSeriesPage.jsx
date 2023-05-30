@@ -3,7 +3,7 @@ import SearchForm from '../components/Search';
 import Movies from '../components/Media';
 
 import data from './../data.json';
-import { assets } from './../assets';
+import { assets } from '../assets';
 
 const TvSeriesPage = function () {
     const title = 'TV Series';
@@ -11,9 +11,11 @@ const TvSeriesPage = function () {
 
     return (
         <>
-            <NavigationBar />
-            <SearchForm />
-            <Movies assets={assets} movies={movies} title={title} />
+            <main>
+                <NavigationBar />
+                <SearchForm />
+                <Movies assets={assets} movies={movies} title={title} />
+            </main>
         </>
     );
 };

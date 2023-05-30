@@ -1,4 +1,4 @@
-import styles from './../styles/NavigationBar.module.scss';
+import styles from './../styles/Navigation.module.scss';
 import { NavLink, Link } from 'react-router-dom';
 import { assets } from '../assets';
 
@@ -22,7 +22,7 @@ const NavigationBar = function () {
                         <NavLink className={({ isActive }) => isActive ? `${styles.btn} ${styles.active}` : `${styles.btn}`} to="/bookmarks">{assets.svgNavBookmark}</NavLink>
                     </div>
 
-                    <Link className={styles.profile_btn} to="/profile">
+                    <Link className={styles.profile_btn} to="/">
                         <img src={assets.imageAvatar} alt="User Image" />
                     </Link>
                 </div>

@@ -13,10 +13,12 @@ const HomePage = function () {
 
     return (
         <>
-            <NavigationBar />
-            <SearchForm />
-            <Trending assets={assets} trending={trending} />
-            <Movies assets={assets} movies={movies} title={title} />
+            <main>
+                <NavigationBar />
+                <SearchForm />
+                <Trending assets={assets} trending={trending} />
+                <Movies assets={assets} movies={movies} title={title} />
+            </main>
         </>
     );
 };

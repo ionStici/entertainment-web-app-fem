@@ -3,9 +3,8 @@ import { assets } from '../assets';
 
 const ErrorPage = function () {
     const section = {
-        position: 'absolute',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        display: 'flex',
+        justifyContent: 'center',
         padding: '120px 0',
     };
 
@@ -31,15 +30,17 @@ const ErrorPage = function () {
 
     return (
         <>
-            <section style={section}>
-                <div style={wrapper}>
-                    <Link style={link} to="/">
-                        <img src={assets.logo} alt="Logo" />
-                        <h1>(404)</h1>
-                    </Link>
-                    <p>No such page exists</p>
-                </div>
-            </section>
+            <main>
+                <section style={section}>
+                    <div style={wrapper}>
+                        <Link style={link} to="/">
+                            <img src={assets.logo} alt="Logo" />
+                            <h1>(404)</h1>
+                        </Link>
+                        <p>No such page exists</p>
+                    </div>
+                </section>
+            </main>
         </>
     );
 };
