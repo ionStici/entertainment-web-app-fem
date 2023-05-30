@@ -1,9 +1,7 @@
 import NavigationBar from '../components/Navigation';
 import SearchForm from '../components/Search';
 import Movies from '../components/Media';
-
 import data from '../data.json';
-import { assets } from '../assets';
 
 const MoviesPage = function () {
     const title = 'Movies';
@@ -14,7 +12,7 @@ const MoviesPage = function () {
             <main>
                 <NavigationBar />
                 <SearchForm />
-                <Movies assets={assets} movies={movies} title={title} />
+                <Movies movies={movies} title={title} />
             </main>
         </>
     );

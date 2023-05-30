@@ -1,10 +1,15 @@
 import styles from './../styles/Search.module.scss';
+import data from './../data.json';
 import { assets } from './../assets';
+import { useNavigate } from 'react-router-dom';
 
 const SearchForm = function (props) {
+    const navigate = useNavigate();
+    const goToSearch = () => navigate('/search');
+
     return (
         <>
-            <div className={styles.wrapper}>
+            <div className={styles.wrapper} onClick={goToSearch}>
                 <form
                     className={styles.form}
                     onSubmit={e => {
@@ -22,8 +27,9 @@ const SearchForm = function (props) {
                             type="text"
                             placeholder="Search for movies or TV series"
                             id="Search"
-                            onChange={props.handleSearch}
                             spellCheck="false"
+                            onChange={props.handleSearch}
+                            autoFocus={props.focus ? true : undefined}
                         />
                     </label>
                 </form>

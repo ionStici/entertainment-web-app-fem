@@ -3,11 +3,11 @@ import SearchForm from '../components/Search';
 import Movies from '../components/Media';
 import moviesStyles from './../styles/Movies.module.scss';
 import React from 'react';
-import { assets } from '../assets';
 import data from '../data.json';
 
 const BookmarksPage = function () {
     const [page, updatePage] = React.useState(0);
+    const update = () => updatePage(prev => prev + 1);
 
     const moviesTitle = 'Bookmarked Movies';
 
@@ -21,8 +21,6 @@ const BookmarksPage = function () {
         return movie.isBookmarked && movie.category === 'TV Series';
     });
 
-    const update = () => updatePage(prev => prev + 1);
-
     return (
         <>
             <main>
@@ -31,7 +29,6 @@ const BookmarksPage = function () {
 
                 {movies[0] ? (
                     <Movies
-                        assets={assets}
                         movies={movies}
                         title={moviesTitle}
                         update={update}
@@ -48,7 +45,6 @@ const BookmarksPage = function () {
 
                 {tvSeries[0] ? (
                     <Movies
-                        assets={assets}
                         movies={tvSeries}
                         title={tvSerTitle}
                         update={update}

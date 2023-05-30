@@ -1,11 +1,9 @@
 import React from 'react';
+import { assets } from '../assets';
 import styles from './../styles/Trending.module.scss';
-import PropTypes from 'prop-types';
 
 const Trending = function (props) {
     const trending = props.trending;
-
-    const assets = props.assets;
 
     const handleBookmarkMouseOver = function ({ target }) {
         const icon = target.querySelector('img');
@@ -102,11 +100,6 @@ const Trending = function (props) {
             </section>
         </>
     );
-};
-
-Trending.propTypes = {
-    assets: PropTypes.object,
-    trending: PropTypes.any,
 };
 
 export default Trending;

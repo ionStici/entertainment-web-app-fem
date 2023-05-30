@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import MoviesPage from './pages/MoviesPage';
 import TvSeriesPage from './pages/TvSeriesPage';
 import BookmarksPage from './pages/BookmarksPage';
+import SearchPage from './pages/SearchPage';
 import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     {
         path: '/bookmarks',
         element: <BookmarksPage />,
+    },
+    {
+        path: '/search',
+        element: <SearchPage />,
     },
 ]);
 

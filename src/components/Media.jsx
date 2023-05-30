@@ -1,9 +1,8 @@
 import React from 'react';
+import { assets } from '../assets';
 import styles from './../styles/Movies.module.scss';
-import PropTypes from 'prop-types';
 
 const Movies = function (props) {
-    const assets = props.assets;
     const movies = props.movies;
 
     const handleBookmarkMouseOver = function ({ target }) {
@@ -105,12 +104,6 @@ const Movies = function (props) {
             </section>
         </>
     );
-};
-
-Movies.propTypes = {
-    assets: PropTypes.object,
-    title: PropTypes.string,
-    movies: PropTypes.array,
 };
 
 export default Movies;
