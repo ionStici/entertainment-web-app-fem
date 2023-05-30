@@ -22,17 +22,27 @@ const BookmarksPage = function () {
         return movie.isBookmarked && movie.category === 'TV Series';
     });
 
+    // // // // // // // // // // // // // // // // // // // //
+
     const [hide, setHide] = React.useState(false);
     let componentsLoaded = 0;
 
+    if (!movies[0]) componentsLoaded++;
+    if (!tvSeries[0]) componentsLoaded++;
+
+    React.useEffect(() => {
+        if (!movies[0] && !tvSeries[0]) setHide(true);
+    }, []);
+
     const imgsLoaded = () => {
         componentsLoaded++;
-        if (componentsLoaded === 2) setHide(true);
+        if (componentsLoaded >= 2) setHide(true);
     };
+
+    // // // // // // // // // // // // // // // // // // // //
 
     return (
         <>
-            {' '}
             <Loading hide={hide} />
             <NavigationBar />
             <SearchForm />
