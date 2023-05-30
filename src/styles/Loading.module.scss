@@ -1,0 +1,94 @@
+.block {
+    width: 100vw;
+    height: 120vh;
+    background-color: var(--color-dark-blue);
+
+    position: fixed;
+    z-index: 250;
+    left: 0;
+    top: 0;
+
+    transition: opacity 0.25s;
+}
+
+.box {
+    position: absolute;
+    z-index: 300;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+
+    transition: transform 0.25s;
+}
+
+.lds_ripple {
+    display: inline-block;
+    position: relative;
+    width: 180px;
+    height: 180px;
+}
+
+.lds_ripple div {
+    position: absolute;
+    border: 4px solid #fff;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds_ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.lds_ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+
+@keyframes lds_ripple {
+    0% {
+        top: 86px;
+        left: 86px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    4.9% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    5% {
+        top: 86px;
+        left: 86px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        top: 0px;
+        left: 0px;
+        width: 172px;
+        height: 172px;
+        opacity: 0;
+    }
+}
+
+.hide {
+    display: none;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.exit {
+    animation: slide-out-fwd-center 0.25s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+        both;
+}
+
+@keyframes slide-out-fwd-center {
+    0% {
+        transform: translateZ(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateZ(600px);
+        opacity: 0;
+    }
+}

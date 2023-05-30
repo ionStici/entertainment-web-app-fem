@@ -57,6 +57,18 @@ const Trending = function (props) {
 
     if (!trending) return null;
 
+    // // // // // // // // // // // // // // // // // // // //
+
+    let imgsLoaded = 0;
+    const totalImgs = trending.length;
+
+    const handleLoad = function (e) {
+        imgsLoaded++;
+        if (imgsLoaded === totalImgs) props.imgsLoaded();
+    };
+
+    // // // // // // // // // // // // // // // // // // // //
+
     return (
         <>
             <section className={styles.section}>
@@ -71,7 +83,7 @@ const Trending = function (props) {
                                         {/* prettier-ignore */}
                                         <source srcSet={movie.thumbnail.trending.small} media='(max-width: 767px)' />
                                         {/* prettier-ignore */}
-                                        <img className={styles.box_img} src={movie.thumbnail.trending.large} alt={movie.title} />
+                                        <img onLoad={handleLoad} className={styles.box_img} src={movie.thumbnail.trending.large} alt={movie.title} />
                                     </picture>
 
                                     {/* prettier-ignore */}

@@ -1,6 +1,5 @@
 import NavigationBar from '../components/Navigation';
 import SearchForm from '../components/Search';
-import Trending from '../components/Trending';
 import Movies from '../components/Media';
 import React from 'react';
 import data from '../data.json';
@@ -23,11 +22,15 @@ const SearchPage = function (props) {
     };
 
     return (
-        <main>
+        <>
             <NavigationBar />
             <SearchForm focus={true} handleSearch={handleSearch} />
-            {media ? <Movies movies={media} title={title} /> : ''}
-        </main>
+            {media ? (
+                <Movies movies={media} title={title} imgsLoaded={() => ''} />
+            ) : (
+                ''
+            )}
+        </>
     );
 };
 

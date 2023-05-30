@@ -6,6 +6,7 @@ const ErrorPage = function () {
         display: 'flex',
         justifyContent: 'center',
         padding: '120px 0',
+        margin: '0 auto',
     };
 
     const wrapper = {
@@ -30,17 +31,15 @@ const ErrorPage = function () {
 
     return (
         <>
-            <main>
-                <section style={section}>
-                    <div style={wrapper}>
-                        <Link style={link} to="/">
-                            <img src={assets.logo} alt="Logo" />
-                            <h1>(404)</h1>
-                        </Link>
-                        <p>No such page exists</p>
-                    </div>
-                </section>
-            </main>
+            <section style={section}>
+                <div style={wrapper}>
+                    <Link style={link} to="/">
+                        <img src={assets.logo} alt="Logo" />
+                        <h1>(404)</h1>
+                    </Link>
+                    <p>No such page exists</p>
+                </div>
+            </section>
         </>
     );
 };

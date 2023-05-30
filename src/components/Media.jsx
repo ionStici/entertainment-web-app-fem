@@ -57,6 +57,18 @@ const Movies = function (props) {
         }
     };
 
+    // // // // // // // // // // // // // // // // // // // //
+
+    let imgsLoaded = 0;
+    const totalImgs = movies.length;
+
+    const handleLoad = function (e) {
+        imgsLoaded++;
+        if (imgsLoaded === totalImgs) props.imgsLoaded();
+    };
+
+    // // // // // // // // // // // // // // // // // // // //
+
     return (
         <>
             <section className={styles.section}>
@@ -74,7 +86,7 @@ const Movies = function (props) {
                                             {/* prettier-ignore */}
                                             <source srcSet={movie.thumbnail.regular.medium} media='(max-width: 1099px)' />
                                             {/* prettier-ignore */}
-                                            <img className={styles.movie_img} src={movie.thumbnail.regular.large} alt={movie.title} />
+                                            <img onLoad={handleLoad} className={styles.movie_img} src={movie.thumbnail.regular.large} alt={movie.title} />
                                         </picture>
 
                                         {/* prettier-ignore */}
