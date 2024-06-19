@@ -60,3 +60,30 @@ main {
     margin-left: 32px;
   }
 }
+
+.error {
+  text-align: center;
+  padding: 100px 16px;
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  a,
+  a:link,
+  a:visited {
+    color: var(--color-red);
+    font-size: 18px;
+    letter-spacing: 1px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
