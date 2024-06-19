@@ -1,10 +1,29 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import './styles/base.scss';
-import HomePage from './pages/HomePage';
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import "./styles/base.scss";
+
+import HomePage from "./pages/HomePage";
+import MoviesPage from "./pages/MoviesPage";
+import SeriesPage from "./pages/SeriesPage";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/movies",
+    element: <MoviesPage />,
+  },
+  {
+    path: "/series",
+    element: <SeriesPage />,
+  },
+  {
+    path: "/bookmarks",
+    element: <HomePage />,
+  },
+  {
+    path: "/search",
     element: <HomePage />,
   },
 ]);

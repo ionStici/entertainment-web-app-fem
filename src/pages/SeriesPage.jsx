@@ -4,7 +4,7 @@ import SearchBar from "../components/SearchBar";
 import Media from "../components/Media";
 import { useState, useRef } from "react";
 
-const MoviesPage = function () {
+const SeriesPage = function () {
   const [hide, setHide] = useState(false);
   let { current: componentsLoaded } = useRef(0);
 
@@ -17,9 +17,9 @@ const MoviesPage = function () {
     <Layout>
       <Loading hide={hide} />
       <SearchBar />
-      <Media loading={loading} select="movies" title="Movies" />
+      <Media loading={loading} select="series" title="TV Series" />
     </Layout>
   );
 };
 
-export default MoviesPage;
+export default SeriesPage;

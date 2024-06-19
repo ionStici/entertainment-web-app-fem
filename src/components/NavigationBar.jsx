@@ -1,7 +1,7 @@
-import { ReactSVG } from "react-svg";
-import { useMovies } from "../contexts/MoviesContext";
 import styles from "./../styles/NavigationBar.module.scss";
+import { useMovies } from "../contexts/MoviesContext";
 import { NavLink, Link } from "react-router-dom";
+import { ReactSVG } from "react-svg";
 
 const NavigationBar = function () {
   const { icons } = useMovies();

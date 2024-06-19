@@ -1,11 +1,9 @@
-import NavigationBar from './NavigationBar';
-import SearchBar from './SearchBar';
+import NavigationBar from "./NavigationBar";
 
 function Layout({ children }) {
   return (
     <main>
       <NavigationBar />
-      <SearchBar />
       {children}
     </main>
   );

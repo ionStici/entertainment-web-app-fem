@@ -12,12 +12,7 @@ const SearchBar = function ({ focus = false, handleSearch }) {
 
   return (
     <div className={styles.wrapper} onClick={goToSearch}>
-      <form
-        className={styles.form}
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
+      <form onSubmit={(e) => e.preventDefault()}>
         <label className={styles.label} htmlFor="Search">
           <img className={styles.icon} src={iconSearch} alt="Search" />
           <input
@@ -28,6 +23,7 @@ const SearchBar = function ({ focus = false, handleSearch }) {
             spellCheck="false"
             onChange={() => handleSearch?.()}
             autoFocus={focus ? true : undefined}
+            autoComplete="off"
           />
         </label>
       </form>

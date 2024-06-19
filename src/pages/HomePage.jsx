@@ -1,8 +1,9 @@
-import Layout from '../components/Layout';
-import Trending from '../components/Trending';
-import Media from '../components/Media';
-import Loading from '../components/Loading';
-import { useRef, useState } from 'react';
+import Layout from "../components/Layout";
+import Trending from "../components/Trending";
+import Media from "../components/Media";
+import SearchBar from "../components/SearchBar";
+import Loading from "../components/Loading";
+import { useRef, useState } from "react";
 
 const HomePage = function () {
   const [hide, setHide] = useState(false);
@@ -16,8 +17,9 @@ const HomePage = function () {
   return (
     <Layout>
       <Loading hide={hide} />
+      <SearchBar />
       <Trending loading={loading} />
-      <Media loading={loading} title="Recommended for you" />
+      <Media loading={loading} select="all" title="Recommended for you" />
     </Layout>
   );
 };

@@ -1,13 +1,17 @@
 import styles from "./../styles/Media.module.scss";
 import { useMovies } from "../contexts/MoviesContext";
 
-const Media = function ({ loading, title }) {
+const Media = function ({ loading, select, title }) {
   const { data, toggleBookmark, icons } = useMovies();
 
-  const movies = data.filter((movie) => !movie.isTrending);
+  const movies = data.filter((movie) => {
+    if (select === "all") return !movie.isTrending;
+    if (select === "movies") return movie.category === "Movie";
+    if (select === "series") return movie.category === "TV Series";
+  });
   if (!movies) return null;
 
-  const { bookmarkEmpty, bookmarkFull, categoryMovies, categoryTv, iconPlay } = icons;
+  const { bookmarkEmpty, bookmarkFull, categoryMovie, categoryTv, iconPlay } = icons;
 
   const handleBookmarkClick = function ({ target }) {
     toggleBookmark(target.dataset.movie);
@@ -50,7 +54,7 @@ const Media = function ({ loading, title }) {
                 <div className={styles.box_details}>
                   <p>{movie.year}</p>
                   <p>
-                    <img src={movie.category === "Movie" ? categoryMovies : categoryTv} alt={movie.category} />
+                    <img src={movie.category === "Movie" ? categoryMovie : categoryTv} alt={movie.category} />
                     <span>{movie.category}</span>
                   </p>
                   <p>{movie.rating}</p>
