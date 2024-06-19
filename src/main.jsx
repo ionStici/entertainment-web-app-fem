@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
-import PageProvider from './PageContext.jsx';
+import MoviesProvider from './contexts/MoviesContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <PageProvider>
+    <MoviesProvider>
       <App />
-    </PageProvider>
+    </MoviesProvider>
   </React.StrictMode>
 );

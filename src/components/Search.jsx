@@ -1,11 +1,14 @@
 import styles from './../styles/Search.module.scss';
-import data from './../data.json';
+// import data from './../data.json';
 import { assets } from './../assets';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useMovies } from '../contexts/MoviesContext';
 
 const SearchForm = function (props) {
-  // const navigate = useNavigate();
-  const goToSearch = () => "navigate('/search');";
+  const { data } = useMovies();
+
+  const navigate = useNavigate();
+  const goToSearch = () => navigate('/search');
 
   return (
     <>

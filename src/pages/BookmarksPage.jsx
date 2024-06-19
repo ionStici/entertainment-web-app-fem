@@ -2,11 +2,13 @@ import NavigationBar from '../components/Navigation';
 import SearchForm from '../components/Search';
 import Movies from '../components/Media';
 import moviesStyles from './../styles/Movies.module.scss';
-import data from '../data.json';
 import React from 'react';
 import Loading from '../components/Loading';
+import { useMovies } from '../contexts/MoviesContext';
 
 const BookmarksPage = function () {
+  const { data } = useMovies();
+
   const [page, updatePage] = React.useState(0);
   const update = () => updatePage((prev) => prev + 1);
 

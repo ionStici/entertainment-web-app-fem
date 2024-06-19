@@ -1,11 +1,13 @@
 import NavigationBar from '../components/Navigation';
 import SearchForm from '../components/Search';
 import Movies from '../components/Media';
-import data from '../data.json';
 import Loading from '../components/Loading';
 import React from 'react';
+import { useMovies } from '../contexts/MoviesContext';
 
 const MoviesPage = function () {
+  const { data } = useMovies();
+
   const title = 'Movies';
   const movies = data.filter((movie) => movie.category === 'Movie');
 

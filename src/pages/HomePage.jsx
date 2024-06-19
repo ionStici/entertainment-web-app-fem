@@ -1,17 +1,22 @@
-import NavigationBar from '../components/Navigation';
-import SearchForm from '../components/Search';
 import Trending from '../components/Trending';
-import Media from '../components/Media';
-import data from '../data.json';
-import Loading from '../components/Loading';
-import React from 'react';
+
+// import NavigationBar from '../components/Navigation';
+// import SearchForm from '../components/Search';
+// import Media from '../components/Media';
+// import Loading from '../components/Loading';
+
+import { useState } from 'react';
+
+import { useMovies } from '../contexts/MoviesContext';
 
 const HomePage = function () {
+  const { data, toggleBookmark } = useMovies();
+
   const title = 'Recommended for you';
   const trending = data.filter((movie) => movie.isTrending);
   const movies = data.filter((movie) => !movie.isTrending);
 
-  const [hide, setHide] = React.useState(false);
+  const [hide, setHide] = useState(false);
   let componentsLoaded = 0;
 
   const imgsLoaded = () => {
@@ -21,11 +26,11 @@ const HomePage = function () {
 
   return (
     <main>
-      <Loading hide={hide} />
-      <NavigationBar />
-      <SearchForm />
-      <Trending trending={trending} imgsLoaded={imgsLoaded} />
-      <Media movies={movies} title={title} imgsLoaded={imgsLoaded} />
+      {/* <Loading hide={hide} /> */}
+      {/* <NavigationBar /> */}
+      {/* <SearchForm /> */}
+      <Trending finish={imgsLoaded} />
+      {/* <Media movies={movies} title={title} imgsLoaded={imgsLoaded} /> */}
     </main>
   );
 };

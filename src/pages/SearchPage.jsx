@@ -2,9 +2,11 @@ import NavigationBar from '../components/Navigation';
 import SearchForm from '../components/Search';
 import Movies from '../components/Media';
 import React from 'react';
-import data from '../data.json';
+import { useMovies } from '../contexts/MoviesContext';
 
 const SearchPage = function (props) {
+  const { data } = useMovies();
+
   const [title, setTitle] = React.useState();
   const [media, setMedia] = React.useState('');
 
