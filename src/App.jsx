@@ -5,8 +5,7 @@ import SeriesPage from "./pages/SeriesPage";
 import BookmarksPage from "./pages/BookmarksPage";
 import SearchPage from "./pages/SearchPage";
 import ErrorPage from "./pages/ErrorPage";
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
+import AuthPage from "./pages/AuthPage";
 import ProfilePage from "./pages/ProfilePage";
 
 const router = createBrowserRouter([
@@ -15,8 +14,8 @@ const router = createBrowserRouter([
   { path: "/series", element: <SeriesPage /> },
   { path: "/bookmarks", element: <BookmarksPage /> },
   { path: "/search", element: <SearchPage /> },
-  { path: "/login", element: <LoginPage /> },
-  { path: "/signup", element: <SignUpPage /> },
+  { path: "/login", element: <AuthPage /> },
+  { path: "/signup", element: <AuthPage /> },
   { path: "/profile", element: <ProfilePage /> },
 ]);
 
