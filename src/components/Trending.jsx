@@ -1,68 +1,25 @@
 import styles from './../styles/Trending.module.scss';
-
 import { useMovies } from '../contexts/MoviesContext';
 
-const Trending = function ({ finish }) {
-  const { data, toggleBookmark } = useMovies();
-  const trending = data.filter((movie) => movie.isTrending);
+const Trending = function ({ loading }) {
+  const { data, toggleBookmark, icons } = useMovies();
 
+  const trending = data.filter((movie) => movie.isTrending);
   if (!trending) return null;
 
-  const handleBookmarkMouseOver = function ({ target }) {
-    // const icon = target.querySelector('img');
-    // icon.classList.add(styles.bookmark_button_hover);
-    // if (icon.dataset.isbookmarked === 'false') {
-    //   icon.src = assets.iconBookmarkFull;
-    // }
-    // if (icon.dataset.isbookmarked === 'true') {
-    //   icon.src = assets.iconBookmarkEmpty;
-    // }
-  };
+  const { bookmarkEmpty, bookmarkFull, categMovie, categTv, iconPlay } = icons;
 
-  const handleBookmarkMouseOut = function ({ target }) {
-    // const icon = target.querySelector('img');
-    // icon.classList.remove(styles.bookmark_button_hover);
-    // if (!(icon.dataset.isbookmarked === 'false')) {
-    //   icon.src = assets.iconBookmarkFull;
-    // }
-    // if (!(icon.dataset.isbookmarked === 'true')) {
-    //   icon.src = assets.iconBookmarkEmpty;
-    // }
-  };
-
-  // const [bookmark, updateBookmark] = React.useState(0);
-
-  const handleBookmarkClick = function ({ target }) {
-    // console.log(target.dataset.movie);
+  const handleToggleBookmark = ({ target }) => {
     toggleBookmark(target.dataset.movie);
-    // const icon = target.querySelector('img');
-    // icon.classList.remove(styles.bookmark_button_hover);
-    // const movie = trending.find((movie) => {
-    //   return movie.title === target.dataset.movie;
-    // });
-    // updateBookmark((prev) => prev + 1);
-    // bookmark;
-    // if (movie.isBookmarked === false) {
-    //   movie.isBookmarked = true;
-    //   return;
-    // }
-    // if (movie.isBookmarked === true) {
-    //   movie.isBookmarked = false;
-    //   return;
-    // }
   };
-
-  // // // // // // // // // // // // // // // // // // // //
 
   let imgsLoaded = 0;
   const totalImgs = trending.length;
 
-  const handleLoad = function (e) {
+  const handleLoad = () => {
     imgsLoaded++;
-    if (imgsLoaded === totalImgs) finish();
+    if (imgsLoaded === totalImgs) loading();
   };
-
-  // // // // // // // // // // // // // // // // // // // //
 
   return (
     <section className={styles.section}>
@@ -80,9 +37,24 @@ const Trending = function ({ finish }) {
                 </picture>
 
                 {/* prettier-ignore */}
-                <button className={styles.bookmark_button} onClick={handleBookmarkClick} onMouseOver={handleBookmarkMouseOver} onMouseOut={handleBookmarkMouseOut}  aria-label="Bookmark" data-movie={movie.title}><img src={movie.isBookmarked ? 'assets/icon-bookmark-full.svg' : 'assets/icon-bookmark-empty.svg'} alt="Bookmark" data-isbookmarked={movie.isBookmarked} /></button>
+                <button className={styles.bookmark_button} onClick={handleToggleBookmark} aria-label="Bookmark" data-movie={movie.title}><img src={movie.isBookmarked ? bookmarkFull : bookmarkEmpty} alt="Bookmark" /></button>
 
-                {/*  */}
+                <div className={styles.box_details}>
+                  <p>{movie.year}</p>
+                  <p>
+                    {/* prettier-ignore */}
+                    <img src={movie.category === 'Movie' ? categMovie : categTv} alt={movie.category} />
+                    <span>{movie.category}</span>
+                  </p>
+                  <p>{movie.rating}</p>
+                </div>
+
+                <h2 className={styles.movie_title}>{movie.title}</h2>
+
+                <div className={styles.play}>
+                  <img src={iconPlay} alt="Play" />
+                  <p>Play</p>
+                </div>
               </div>
             );
           })}
@@ -93,17 +65,3 @@ const Trending = function ({ finish }) {
 };
 
 export default Trending;
-
-//         <div className={styles.box_details}>
-//           <p>{movie.year}</p>
-//           {/* prettier-ignore */}
-//           <p><img src={movie.category === 'Movie' ? assets.iconCategoryMovie : assets.iconCategoryTv} alt={movie.category} /><span>{movie.category}</span></p>
-//           <p>{movie.rating}</p>
-//         </div>
-
-//         <h2 className={styles.movie_title}>{movie.title}</h2>
-
-//         <div className={styles.play}>
-//           <img src={assets.iconPlay} alt="" />
-//           <p>Play</p>
-//         </div>

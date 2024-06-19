@@ -16,7 +16,7 @@ function MoviesProvider({ children }) {
   };
 
   return (
-    <MoviesContext.Provider value={{ data, toggleBookmark }}>
+    <MoviesContext.Provider value={{ data, toggleBookmark, icons }}>
       {children}
     </MoviesContext.Provider>
   );
@@ -29,6 +29,25 @@ export function useMovies() {
 }
 
 export default MoviesProvider;
+
+const icons = {
+  bookmarkEmpty: 'assets/icon-bookmark-empty.svg',
+  bookmarkFull: 'assets/icon-bookmark-full.svg',
+
+  categMovie: 'assets/icon-category-movie.svg',
+  categTv: 'assets/icon-category-tv.svg',
+
+  iconHome: 'assets/icon-nav-home.svg',
+  iconMovies: 'assets/icon-nav-movies.svg',
+  iconSeries: 'assets/icon-nav-tv-series.svg',
+  iconBookmark: 'assets/icon-nav-bookmark.svg',
+
+  logo: 'assets/logo.svg',
+  user: 'assets/image-avatar.png',
+
+  iconPlay: 'assets/icon-play.svg',
+  iconSearch: 'assets/icon-search.svg',
+};
 
 const movies = [
   {

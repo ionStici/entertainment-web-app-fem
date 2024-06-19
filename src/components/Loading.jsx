@@ -1,30 +1,29 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './../styles/Loading.module.scss';
+import { createPortal } from 'react-dom';
 
-const Loading = function (props) {
-    const block = React.useRef(null);
-    const box = React.useRef(null);
+const Loading = function ({ hide }) {
+  const layout = useRef(null);
+  const box = useRef(null);
 
-    React.useEffect(() => {
-        if (props.hide) {
-            block.current.classList.add(styles.exit);
-            setTimeout(() => block.current.classList.add(styles.hide), 250);
-        }
-    }, [props.hide]);
+  useEffect(() => {
+    if (hide) {
+      layout.current.classList.add(styles.exit);
+      setTimeout(() => layout.current.classList.add(styles.hide), 250);
+    }
+  }, [hide]);
 
-    return (
-        <>
-            {/* prettier-ignore */}
-            <div className={`${styles.block}`} ref={block}>
-                <div className={styles.box} ref={box}>
-                    <div className={styles.lds_ripple}>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+  return createPortal(
+    <div className={styles.layout} ref={layout}>
+      <div className={styles.box} ref={box}>
+        <div className={styles.lds_ripple}>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
 };
 
 export default Loading;

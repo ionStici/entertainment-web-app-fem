@@ -1,78 +1,30 @@
-import React from 'react';
-import { assets } from '../assets';
-import styles from './../styles/Movies.module.scss';
+import styles from './../styles/Media.module.scss';
+import { useMovies } from '../contexts/MoviesContext';
 
-const Movies = function (props) {
-  const movies = props.movies;
+const Media = function ({ title, loading }) {
+  const { data, toggleBookmark, icons } = useMovies();
 
-  const handleBookmarkMouseOver = function ({ target }) {
-    const icon = target.querySelector('img');
-    icon.classList.add(styles.bookmark_button_hover);
+  const movies = data.filter((movie) => !movie.isTrending);
+  if (!movies) return null;
 
-    if (icon.dataset.isbookmarked === 'false') {
-      icon.src = assets.iconBookmarkFull;
-    }
-
-    if (icon.dataset.isbookmarked === 'true') {
-      icon.src = assets.iconBookmarkEmpty;
-    }
-  };
-
-  const handleBookmarkMouseOut = function ({ target }) {
-    const icon = target.querySelector('img');
-    icon.classList.remove(styles.bookmark_button_hover);
-
-    if (!(icon.dataset.isbookmarked === 'false')) {
-      icon.src = assets.iconBookmarkFull;
-    }
-
-    if (!(icon.dataset.isbookmarked === 'true')) {
-      icon.src = assets.iconBookmarkEmpty;
-    }
-  };
-
-  const [bookmark, updateBookmark] = React.useState(0);
+  const { bookmarkEmpty, bookmarkFull, categMovie, categTv, iconPlay } = icons;
 
   const handleBookmarkClick = function ({ target }) {
-    const icon = target.querySelector('img');
-    icon.classList.remove(styles.bookmark_button_hover);
-
-    const movie = movies.find((movie) => {
-      return movie.title === target.dataset.movie;
-    });
-
-    updateBookmark((prev) => prev + 1);
-    bookmark;
-
-    if (props.update) props.update();
-
-    if (movie.isBookmarked === false) {
-      movie.isBookmarked = true;
-      return;
-    }
-
-    if (movie.isBookmarked === true) {
-      movie.isBookmarked = false;
-      return;
-    }
+    toggleBookmark(target.dataset.movie);
   };
-
-  // // // // // // // // // // // // // // // // // // // //
 
   let imgsLoaded = 0;
   const totalImgs = movies.length;
 
-  const handleLoad = function (e) {
+  const handleLoad = function () {
     imgsLoaded++;
-    if (imgsLoaded === totalImgs) props.imgsLoaded();
+    if (imgsLoaded === totalImgs) loading();
   };
-
-  // // // // // // // // // // // // // // // // // // // //
 
   return (
     <section className={styles.section}>
       <div className={styles.wrapper}>
-        <h1 className={styles.title}>{props.title}</h1>
+        <h1 className={styles.title}>{title}</h1>
 
         <div className={styles.boxes}>
           {movies.map((movie, i) => {
@@ -89,10 +41,10 @@ const Movies = function (props) {
                   </picture>
 
                   {/* prettier-ignore */}
-                  <button onClick={handleBookmarkClick} onMouseOver={handleBookmarkMouseOver} onMouseOut={handleBookmarkMouseOut} className={styles.bookmark_button} aria-label="Bookmark" data-movie={movie.title}><img src={movie.isBookmarked ? assets.iconBookmarkFull : assets.iconBookmarkEmpty} alt="Bookmark" data-isbookmarked={movie.isBookmarked} /></button>
+                  <button onClick={handleBookmarkClick} className={styles.bookmark_button} aria-label="Bookmark" data-movie={movie.title}><img src={movie.isBookmarked ? bookmarkFull: bookmarkEmpty} alt="Bookmark"  /></button>
 
                   <div className={styles.play}>
-                    <img src={assets.iconPlay} alt="" />
+                    <img src={iconPlay} alt="" />
                     <p>Play</p>
                   </div>
                 </div>
@@ -100,7 +52,7 @@ const Movies = function (props) {
                 <div className={styles.box_details}>
                   <p>{movie.year}</p>
                   {/* prettier-ignore */}
-                  <p><img src={movie.category === 'Movie' ? assets.iconCategoryMovie : assets.iconCategoryTv} alt={movie.category} /><span>{movie.category}</span></p>
+                  <p><img src={movie.category === 'Movie' ? categMovie : categTv} alt={movie.category} /><span>{movie.category}</span></p>
                   <p>{movie.rating}</p>
                 </div>
 
@@ -114,4 +66,4 @@ const Movies = function (props) {
   );
 };
 
-export default Movies;
+export default Media;
