@@ -1,17 +1,17 @@
-import { ReactSVG } from 'react-svg';
-import { useMovies } from '../contexts/MoviesContext';
-import styles from './../styles/Navigation.module.scss';
-import { NavLink, Link } from 'react-router-dom';
+import { ReactSVG } from "react-svg";
+import { useMovies } from "../contexts/MoviesContext";
+import styles from "./../styles/NavigationBar.module.scss";
+import { NavLink, Link } from "react-router-dom";
 
 const NavigationBar = function () {
   const { icons } = useMovies();
   const { iconHome, iconMovies, iconSeries, iconBookmark, logo, user } = icons;
 
   const pages = [
-    { page: '/', icon: iconHome },
-    { page: '/movies', icon: iconMovies },
-    { page: '/series', icon: iconSeries },
-    { page: '/bookmarks', icon: iconBookmark },
+    { page: "/", icon: iconHome },
+    { page: "/movies", icon: iconMovies },
+    { page: "/series", icon: iconSeries },
+    { page: "/bookmarks", icon: iconBookmark },
   ];
 
   return (
@@ -24,8 +24,7 @@ const NavigationBar = function () {
         <div className={styles.btns_wrapper}>
           {pages.map(({ page, icon }) => {
             return (
-              // prettier-ignore
-              <NavLink to={page} key={page} className={({ isActive }) => isActive ? `${styles.btn} ${styles.active}` : `${styles.btn}`} >
+              <NavLink to={page} key={page} className={({ isActive }) => (isActive ? `${styles.btn} ${styles.active}` : `${styles.btn}`)}>
                 <ReactSVG src={icon} />
               </NavLink>
             );

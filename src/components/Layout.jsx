@@ -1,10 +1,11 @@
 import NavigationBar from './NavigationBar';
+import SearchBar from './SearchBar';
 
 function Layout({ children }) {
   return (
     <main>
       <NavigationBar />
-      <div></div>
+      <SearchBar />
       {children}
     </main>
   );

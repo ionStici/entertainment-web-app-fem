@@ -1,5 +1,5 @@
-import styles from './../styles/Trending.module.scss';
-import { useMovies } from '../contexts/MoviesContext';
+import styles from "./../styles/Trending.module.scss";
+import { useMovies } from "../contexts/MoviesContext";
 
 const Trending = function ({ loading }) {
   const { data, toggleBookmark, icons } = useMovies();
@@ -7,7 +7,7 @@ const Trending = function ({ loading }) {
   const trending = data.filter((movie) => movie.isTrending);
   if (!trending) return null;
 
-  const { bookmarkEmpty, bookmarkFull, categMovie, categTv, iconPlay } = icons;
+  const { bookmarkEmpty, bookmarkFull, categoryMovie, categoryTv, iconPlay } = icons;
 
   const handleToggleBookmark = ({ target }) => {
     toggleBookmark(target.dataset.movie);
@@ -18,7 +18,7 @@ const Trending = function ({ loading }) {
 
   const handleLoad = () => {
     imgsLoaded++;
-    if (imgsLoaded === totalImgs) loading();
+    if (imgsLoaded === totalImgs) loading?.();
   };
 
   return (
@@ -26,24 +26,22 @@ const Trending = function ({ loading }) {
       <div className={styles.wrapper}>
         <h1 className={styles.title}>Trending</h1>
         <div className={styles.boxes}>
-          {trending.map((movie, i) => {
+          {trending.map((movie) => {
             return (
               <div className={styles.box} key={movie.title}>
                 <picture>
-                  {/* prettier-ignore */}
-                  <source srcSet={movie.thumbnail.trending.small} media='(max-width: 767px)' />
-                  {/* prettier-ignore */}
+                  <source srcSet={movie.thumbnail.trending.small} media="(max-width: 767px)" />
                   <img onLoad={handleLoad} className={styles.box_img} src={movie.thumbnail.trending.large} alt={movie.title} />
                 </picture>
 
-                {/* prettier-ignore */}
-                <button className={styles.bookmark_button} onClick={handleToggleBookmark} aria-label="Bookmark" data-movie={movie.title}><img src={movie.isBookmarked ? bookmarkFull : bookmarkEmpty} alt="Bookmark" /></button>
+                <button className={styles.bookmark_button} onClick={handleToggleBookmark} aria-label="Bookmark" data-movie={movie.title}>
+                  <img src={movie.isBookmarked ? bookmarkFull : bookmarkEmpty} alt="Bookmark" />
+                </button>
 
                 <div className={styles.box_details}>
                   <p>{movie.year}</p>
                   <p>
-                    {/* prettier-ignore */}
-                    <img src={movie.category === 'Movie' ? categMovie : categTv} alt={movie.category} />
+                    <img src={movie.category === "Movie" ? categoryMovie : categoryTv} alt={movie.category} />
                     <span>{movie.category}</span>
                   </p>
                   <p>{movie.rating}</p>
@@ -51,10 +49,10 @@ const Trending = function ({ loading }) {
 
                 <h2 className={styles.movie_title}>{movie.title}</h2>
 
-                <div className={styles.play}>
+                <button className={styles.play}>
                   <img src={iconPlay} alt="Play" />
                   <p>Play</p>
-                </div>
+                </button>
               </div>
             );
           })}

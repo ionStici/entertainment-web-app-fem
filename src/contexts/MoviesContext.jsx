@@ -34,8 +34,8 @@ const icons = {
   bookmarkEmpty: 'assets/icon-bookmark-empty.svg',
   bookmarkFull: 'assets/icon-bookmark-full.svg',
 
-  categMovie: 'assets/icon-category-movie.svg',
-  categTv: 'assets/icon-category-tv.svg',
+  categoryMovie: 'assets/icon-category-movie.svg',
+  categoryTv: 'assets/icon-category-tv.svg',
 
   iconHome: 'assets/icon-nav-home.svg',
   iconMovies: 'assets/icon-nav-movies.svg',

@@ -24,8 +24,12 @@ input {
   color: inherit;
 }
 
+button {
+  cursor: pointer;
+}
+
 html {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
   color: var(--color-white);
   background-color: var(--color-dark-blue);
 }
