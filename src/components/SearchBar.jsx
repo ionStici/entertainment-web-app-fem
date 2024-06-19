@@ -21,7 +21,7 @@ const SearchBar = function ({ focus = false, handleSearch }) {
             placeholder="Search for movies or TV series"
             id="Search"
             spellCheck="false"
-            onChange={() => handleSearch?.()}
+            onChange={(e) => handleSearch?.(e)}
             autoFocus={focus ? true : undefined}
             autoComplete="off"
           />

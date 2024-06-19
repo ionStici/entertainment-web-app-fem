@@ -4,6 +4,8 @@ import "./styles/base.scss";
 import HomePage from "./pages/HomePage";
 import MoviesPage from "./pages/MoviesPage";
 import SeriesPage from "./pages/SeriesPage";
+import BookmarksPage from "./pages/BookmarksPage";
+import SearchPage from "./pages/SearchPage";
 
 const router = createBrowserRouter([
   {
@@ -20,11 +22,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/bookmarks",
-    element: <HomePage />,
+    element: <BookmarksPage />,
   },
   {
     path: "/search",
-    element: <HomePage />,
+    element: <SearchPage />,
   },
 ]);
 

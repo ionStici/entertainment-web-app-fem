@@ -3,8 +3,12 @@ import Loading from "../components/Loading";
 import SearchBar from "../components/SearchBar";
 import Media from "../components/Media";
 import { useState, useRef } from "react";
+import { useMovies } from "../contexts/MoviesContext";
 
 const SeriesPage = function () {
+  const { data } = useMovies();
+  const movies = data.filter((movie) => movie.category === "TV Series");
+
   const [hide, setHide] = useState(false);
   let { current: componentsLoaded } = useRef(0);
 
@@ -17,7 +21,7 @@ const SeriesPage = function () {
     <Layout>
       <Loading hide={hide} />
       <SearchBar />
-      <Media loading={loading} select="series" title="TV Series" />
+      <Media movies={movies} loading={loading} title="TV Series" />
     </Layout>
   );
 };

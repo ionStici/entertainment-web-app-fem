@@ -1,16 +1,10 @@
 import styles from "./../styles/Media.module.scss";
 import { useMovies } from "../contexts/MoviesContext";
 
-const Media = function ({ loading, select, title }) {
-  const { data, toggleBookmark, icons } = useMovies();
-
-  const movies = data.filter((movie) => {
-    if (select === "all") return !movie.isTrending;
-    if (select === "movies") return movie.category === "Movie";
-    if (select === "series") return movie.category === "TV Series";
-  });
+const Media = function ({ movies, loading, title }) {
   if (!movies) return null;
 
+  const { toggleBookmark, icons } = useMovies();
   const { bookmarkEmpty, bookmarkFull, categoryMovie, categoryTv, iconPlay } = icons;
 
   const handleBookmarkClick = function ({ target }) {
