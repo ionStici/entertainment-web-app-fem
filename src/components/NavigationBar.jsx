@@ -1,11 +1,24 @@
 import styles from "./../styles/NavigationBar.module.scss";
 import { useMovies } from "../contexts/MoviesContext";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
+import { useUser } from "../contexts/UserContext";
+
+import { FaUserCircle } from "react-icons/fa";
 
 const NavigationBar = function () {
+  const { user, logOut } = useUser();
+
+  const navigate = useNavigate();
+  const goLogin = () => navigate("/login");
+
+  const handleUserClick = () => {
+    if (!user) goLogin();
+    if (user) logOut();
+  };
+
   const { icons } = useMovies();
-  const { iconHome, iconMovies, iconSeries, iconBookmark, logo, user } = icons;
+  const { iconHome, iconMovies, iconSeries, iconBookmark, logo } = icons;
 
   const pages = [
     { page: "/", icon: iconHome },
@@ -31,9 +44,9 @@ const NavigationBar = function () {
           })}
         </div>
 
-        <Link className={styles.profile_btn} to="/">
-          <img src={user} alt="User Image" />
-        </Link>
+        <button className={styles.profile_btn} onClick={handleUserClick}>
+          {user && user?.avatar ? <img src={user?.avatar} alt="User Image" /> : <FaUserCircle />}
+        </button>
       </div>
     </nav>
   );

@@ -4,12 +4,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import ErrorMessage from "../ui/ErrorMessage";
 import { useUser } from "../contexts/UserContext";
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 function LoginPage() {
   const { pathname: path } = useLocation();
   const isLogin = path === "/login";
 
-  const { user, login, signUp } = useUser();
+  const { user, login, signUp, isLoading } = useUser();
 
   const navigate = useNavigate();
   const goHome = () => navigate("/");
@@ -22,9 +23,9 @@ function LoginPage() {
     defaultValues: {
       loginEmail: "movie_lover@email.mov",
       loginPassword: "mysecretpassword",
-      signupEmail: "john@domain.net",
-      signupPassword: "1234567",
-      repeatPassword: "1234567",
+      signupEmail: "friendly_bear@domain.net",
+      signupPassword: "1234567890abc",
+      repeatPassword: "1234567890abc",
     },
     mode: "onSuccess",
     reValidateMode: "onSubmit",
@@ -43,10 +44,9 @@ function LoginPage() {
 
   return (
     <section className={styles.section}>
-      <div className={styles.logo_box}>
+      <Link className={styles.logo_box} to="/">
         <img src="assets/logo.svg" />
-      </div>
-
+      </Link>
       <div className={styles.form_wrapper}>
         <h1>{isLogin ? "Login" : "Sign Up"}</h1>
 
@@ -74,14 +74,14 @@ function LoginPage() {
 
           {!isLogin && (
             <div>
-              <input {...register("signupEmail", { required: "Can’t be empty" })} type="email" placeholder="Email address" />
+              <input {...register("signupEmail", { required: "Can’t be empty" })} type="email" placeholder="Email address" disabled={isLoading} />
               <ErrorMessage message={errors?.signupEmail?.message} />
             </div>
           )}
 
           {!isLogin && (
             <div>
-              <input {...register("signupPassword", { required: "Can’t be empty" })} type="password" placeholder="Password" />
+              <input {...register("signupPassword", { required: "Can’t be empty" })} type="password" placeholder="Password" disabled={isLoading} />
               {errors?.signupPassword?.message && <span className={styles.error_text}>{errors.signupPassword.message}</span>}
             </div>
           )}
@@ -95,18 +95,21 @@ function LoginPage() {
                 })}
                 type="password"
                 placeholder="Repeat Password"
+                disabled={isLoading}
               />
               <ErrorMessage message={errors?.repeatPassword?.message} />
             </div>
           )}
 
-          <button>{isLogin ? "Login to your account" : "Create an account"}</button>
+          <button disabled={isLoading}>{isLogin ? "Login to your account" : "Create an account"}</button>
         </form>
 
         <div className={styles.text_box}>
           <p>{isLogin ? "Don’t have an account?" : "Already have an account?"}</p>
           <Link to={isLogin ? "/signup" : "/login"}>{isLogin ? "Sign Up" : "Login"}</Link>
         </div>
+
+        {isLoading && <div className={styles.spinner}></div>}
       </div>
     </section>
   );
