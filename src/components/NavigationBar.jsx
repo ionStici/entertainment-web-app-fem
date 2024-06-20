@@ -3,18 +3,22 @@ import { useMovies } from "../contexts/MoviesContext";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import { useUser } from "../contexts/UserContext";
-
 import { FaUserCircle } from "react-icons/fa";
+import UserPopup from "./UserPopup";
+import { useState } from "react";
 
 const NavigationBar = function () {
-  const { user, logOut } = useUser();
+  const { user } = useUser();
+
+  const [isActive, setIsActive] = useState(false);
 
   const navigate = useNavigate();
   const goLogin = () => navigate("/login");
 
   const handleUserClick = () => {
     if (!user) goLogin();
-    if (user) logOut();
+    if (user) setIsActive(true);
+    // if (user) logOut();
   };
 
   const { icons } = useMovies();
@@ -29,6 +33,8 @@ const NavigationBar = function () {
 
   return (
     <nav className={styles.nav}>
+      {isActive && <UserPopup isActive={isActive} setIsActive={setIsActive} />}
+
       <div className={styles.wrapper}>
         <Link className={styles.logo_link} to="/">
           <img src={logo} alt="logo" />
