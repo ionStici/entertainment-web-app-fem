@@ -112,8 +112,12 @@
 
   position: absolute;
   top: 50%;
-  right: 16px;
-  transform: translateY(-50%);
+  right: 0;
+  transform: translateY(-58%);
+
+  background-color: var(--color-semi-dark-blue);
+  padding: 10px;
+  pointer-events: none;
 }
 
 .text_box {

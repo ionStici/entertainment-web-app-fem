@@ -6,7 +6,6 @@ import BookmarksPage from "./pages/BookmarksPage";
 import SearchPage from "./pages/SearchPage";
 import ErrorPage from "./pages/ErrorPage";
 import AuthPage from "./pages/AuthPage";
-import ProfilePage from "./pages/ProfilePage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage />, errorElement: <ErrorPage /> },
@@ -16,7 +15,6 @@ const router = createBrowserRouter([
   { path: "/search", element: <SearchPage /> },
   { path: "/login", element: <AuthPage /> },
   { path: "/signup", element: <AuthPage /> },
-  { path: "/profile", element: <ProfilePage /> },
 ]);
 
 function App() {
