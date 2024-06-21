@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import ErrorMessage from "../ui/ErrorMessage";
 import { useUser } from "../contexts/UserContext";
 import { useEffect } from "react";
-import { createPortal } from "react-dom";
 
 function LoginPage() {
   const { pathname: path } = useLocation();
@@ -21,9 +20,9 @@ function LoginPage() {
 
   const { register, handleSubmit, formState, getValues } = useForm({
     defaultValues: {
-      loginEmail: "movie_lover@email.mov",
+      loginEmail: "movie_lover@me.mov",
       loginPassword: "mysecretpassword",
-      signupEmail: "friendly_bear@domain.net",
+      signupEmail: "funny_guy@hi.net",
       signupPassword: "1234567890abc",
       repeatPassword: "1234567890abc",
     },

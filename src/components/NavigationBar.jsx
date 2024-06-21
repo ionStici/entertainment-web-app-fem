@@ -2,23 +2,21 @@ import styles from "./../styles/NavigationBar.module.scss";
 import { useMovies } from "../contexts/MoviesContext";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
-import { useUser } from "../contexts/UserContext";
 import { FaUserCircle } from "react-icons/fa";
 import UserPopup from "./UserPopup";
 import { useState } from "react";
 
 const NavigationBar = function () {
-  const { user } = useUser();
+  let user;
 
-  const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const navigate = useNavigate();
   const goLogin = () => navigate("/login");
 
-  const handleUserClick = () => {
+  const handleProfileClick = () => {
     if (!user) goLogin();
-    if (user) setIsActive(true);
-    // if (user) logOut();
+    if (user) setIsOpen(true);
   };
 
   const { icons } = useMovies();
@@ -33,7 +31,7 @@ const NavigationBar = function () {
 
   return (
     <nav className={styles.nav}>
-      {isActive && <UserPopup isActive={isActive} setIsActive={setIsActive} />}
+      {isOpen && <UserPopup setIsOpen={setIsOpen} />}
 
       <div className={styles.wrapper}>
         <Link className={styles.logo_link} to="/">
@@ -50,7 +48,7 @@ const NavigationBar = function () {
           })}
         </div>
 
-        <button className={styles.profile_btn} onClick={handleUserClick}>
+        <button className={styles.profile_btn} onClick={handleProfileClick} aria-label="Open User Profile">
           {user && user?.avatar ? <img src={user?.avatar} alt="User Image" /> : <FaUserCircle />}
         </button>
       </div>

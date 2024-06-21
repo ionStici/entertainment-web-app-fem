@@ -21,13 +21,45 @@
 
   display: flex;
   flex-direction: column;
+  position: relative;
 
   @media only screen and (min-width: 768px) {
     border-radius: 20px;
   }
 }
 
-.box {
+.btn_close {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+
+  display: flex;
+  width: fit-content;
+  background-color: transparent;
+
+  border: 2px outset var(--color-dark-blue);
+
+  &:active {
+    border-style: inset;
+  }
+
+  &:hover svg {
+    transform: rotate(90deg);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s;
+  }
+
+  @media only screen and (min-width: 768px) {
+    top: 20px;
+    right: 20px;
+  }
+}
+
+.user_box {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,68 +67,60 @@
   gap: 24px;
   margin-bottom: 24px;
 
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
+  div {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
 
-.img_box {
-  width: 80px;
-  height: 80px;
-  flex-shrink: 0;
-
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
-}
-
-.text_box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  font-size: 16px;
-  letter-spacing: 0.5px;
-
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-
-  span {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
   }
 
-  @media only screen and (min-width: 768px) {
-    font-size: 20px;
-  }
-
-  span:first-child {
+  p {
     font-weight: 700;
     font-size: 24px;
-  }
-
-  span:last-child {
-    max-width: 400px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    letter-spacing: 0.5px;
   }
 }
 
-.logout_btn {
-  background-color: var(--color-red);
+.email {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 24px;
+  font-style: italic;
+  word-break: break-all;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 100%;
   border: none;
   border-radius: 6px;
   height: 50px;
 
   font-size: 20px;
+  font-weight: 400;
   letter-spacing: 1px;
-
   transition: color 0.3s, background-color 0.3s;
 
   &:hover {
     background-color: var(--color-white);
     color: var(--color-semi-dark-blue);
   }
+}
+
+.btn_logout {
+  background-color: var(--color-red);
+  margin-bottom: 16px;
+}
+
+.btn_delete {
+  background-color: #dd0426;
 }

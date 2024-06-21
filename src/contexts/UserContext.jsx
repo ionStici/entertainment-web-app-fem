@@ -1,8 +1,45 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
+
+async function fetchAvatar(dispatch) {
+  dispatch({ type: "loading" });
+
+  try {
+    dispatch({ type: "loading_finished" });
+
+    const res = await fetch("https://randomuser.me/api/");
+    const data = await res.json();
+    const avatar = data.results[0].picture.large;
+
+    dispatch({ type: "" });
+  } catch (err) {
+    dispatch({ type: "loading_finished" });
+  }
+}
+
+const initialState = {
+  isLoading: false,
+  error: null,
+  currentUser: null,
+  allUsers: [{ email: "movie_lover@email.mov", password: "mysecretpassword", avatar: "assets/image-avatar.png" }],
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "loading": {
+      return { ...state, isLoading: true };
+    }
+
+    case "loading_finished": {
+      return { ...state, isLoading: false };
+    }
+  }
+}
 
 const UserContext = createContext();
 
 function UserProvider({ children }) {
+  const [{ currentUser, allUsers }, dispatch] = useReducer(reducer, initialState);
+
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 

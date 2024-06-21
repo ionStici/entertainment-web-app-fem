@@ -1,37 +1,54 @@
-import { createPortal } from "react-dom";
 import styles from "./../styles/UserPopup.module.scss";
-import { useUser } from "../contexts/UserContext";
+import { createPortal } from "react-dom";
 import { useEffect } from "react";
+import { IoClose } from "react-icons/io5";
+import { TbLogout } from "react-icons/tb";
+import { MdDeleteOutline } from "react-icons/md";
 
-function UserPopup({ isActive, setIsActive }) {
-  const { user, logOut } = useUser();
+function UserPopup({ setIsOpen }) {
+  let user, logOut;
 
   useEffect(() => {
-    isActive && document.body.classList.add("hidden");
+    document.body.classList.add("hidden");
     return () => document.body.classList.remove("hidden");
   }, []);
 
   const handleLogOut = () => {
-    logOut();
-    setIsActive(false);
+    setIsOpen(false);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  const handleDelete = () => {
+    setIsOpen(false);
   };
 
   return createPortal(
     <div className={styles.layout}>
       <div className={styles.wrapper}>
-        <div className={styles.box}>
-          <div className={styles.img_box}>
-            <img src={user?.avatar} alt="User Image" />
-          </div>
+        <button className={styles.btn_close} onClick={handleClose}>
+          <IoClose />
+        </button>
 
-          <p className={styles.text_box}>
-            <span>Premium User</span>
-            <span>{user.email}</span>
-          </p>
+        <div className={styles.user_box}>
+          <div>
+            <img src={"assets/image-avatar.png"} alt="User Image" />
+          </div>
+          <p>Premium User</p>
         </div>
 
-        <button className={styles.logout_btn} onClick={handleLogOut}>
-          Log Out
+        <p className={styles.email}>{"funny_guy@hi.net"}</p>
+
+        <button className={`${styles.btn} ${styles.btn_logout}`} onClick={handleLogOut}>
+          <TbLogout />
+          <span>Log Out</span>
+        </button>
+
+        <button className={`${styles.btn} ${styles.btn_delete}`} onClick={handleDelete}>
+          <MdDeleteOutline />
+          <span>Delete User</span>
         </button>
       </div>
     </div>,
