@@ -3,13 +3,13 @@ import { useMovies } from "../contexts/MoviesContext";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import { FaUserCircle } from "react-icons/fa";
-import UserPopup from "./UserPopup";
 import { useState } from "react";
+import UserPopup from "./UserPopup";
 
 const NavigationBar = function () {
   let user;
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
   const goLogin = () => navigate("/login");

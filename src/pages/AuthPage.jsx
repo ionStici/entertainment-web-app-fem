@@ -2,21 +2,20 @@ import { useForm } from "react-hook-form";
 import styles from "./../styles/AuthPage.module.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ErrorMessage from "../ui/ErrorMessage";
-import { useUser } from "../contexts/UserContext";
 import { useEffect } from "react";
 
 function LoginPage() {
   const { pathname: path } = useLocation();
   const isLogin = path === "/login";
 
-  const { user, login, signUp, isLoading } = useUser();
-
-  const navigate = useNavigate();
-  const goHome = () => navigate("/");
+  let user, login, signUp, isLoading;
 
   useEffect(() => {
     if (user) goHome();
   }, [user]);
+
+  const navigate = useNavigate();
+  const goHome = () => navigate("/");
 
   const { register, handleSubmit, formState, getValues } = useForm({
     defaultValues: {
@@ -46,19 +45,23 @@ function LoginPage() {
       <Link className={styles.logo_box} to="/">
         <img src="assets/logo.svg" />
       </Link>
+
       <div className={styles.form_wrapper}>
         <h1>{isLogin ? "Login" : "Sign Up"}</h1>
 
         <form className={styles.form} onSubmit={handleSubmit(onSuccess)}>
           {isLogin && (
             <div>
+              <label htmlFor="login-email">Email Address</label>
               <input
+                id="login-email"
                 {...register("loginEmail", {
                   required: "Can’t be empty",
                   pattern: { value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, message: "Wrong format" },
                 })}
                 type="text"
                 placeholder="Email address"
+                disabled={isLoading}
               />
               <ErrorMessage message={errors?.loginEmail?.message} />
             </div>
@@ -66,28 +69,54 @@ function LoginPage() {
 
           {isLogin && (
             <div>
-              <input {...register("loginPassword", { required: "Can’t be empty" })} type="password" placeholder="Password" />
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                {...register("loginPassword", { required: "Can’t be empty" })}
+                type="password"
+                placeholder="Password"
+                disabled={isLoading}
+              />
               <ErrorMessage message={errors?.loginPassword?.message} />
             </div>
           )}
 
           {!isLogin && (
             <div>
-              <input {...register("signupEmail", { required: "Can’t be empty" })} type="email" placeholder="Email address" disabled={isLoading} />
+              <label htmlFor="signup-email">Email Address</label>
+              <input
+                id="signup-email"
+                {...register("signupEmail", {
+                  required: "Can’t be empty",
+                  pattern: { value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, message: "Wrong format" },
+                })}
+                type="text"
+                placeholder="Email address"
+                disabled={isLoading}
+              />
               <ErrorMessage message={errors?.signupEmail?.message} />
             </div>
           )}
 
           {!isLogin && (
             <div>
-              <input {...register("signupPassword", { required: "Can’t be empty" })} type="password" placeholder="Password" disabled={isLoading} />
+              <label htmlFor="signup-password">Password</label>
+              <input
+                id="signup-password"
+                {...register("signupPassword", { required: "Can’t be empty" })}
+                type="password"
+                placeholder="Password"
+                disabled={isLoading}
+              />
               {errors?.signupPassword?.message && <span className={styles.error_text}>{errors.signupPassword.message}</span>}
             </div>
           )}
 
           {!isLogin && (
             <div>
+              <label htmlFor="repeat-password">Repeat Password</label>
               <input
+                id="repeat-password"
                 {...register("repeatPassword", {
                   required: "Can’t be empty",
                   validate: () => (getValues().signupPassword === getValues().repeatPassword ? true : "Password doesn't match"),

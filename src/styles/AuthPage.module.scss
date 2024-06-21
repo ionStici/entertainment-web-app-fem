@@ -11,7 +11,6 @@
 .logo_box {
   display: flex;
   text-decoration: none;
-
   margin-bottom: 58px;
 
   @media only screen and (min-width: 768px) {
@@ -53,6 +52,15 @@
 
   div {
     position: relative;
+  }
+
+  label {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-65%);
+    pointer-events: none;
+    opacity: 0;
   }
 
   input {
@@ -121,7 +129,7 @@
   border-color: var(--color-red) !important;
 }
 
-.error_text {
+.error_message {
   font-size: 13px;
   font-weight: 300;
   color: var(--color-red);
