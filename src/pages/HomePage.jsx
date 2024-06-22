@@ -3,21 +3,10 @@ import Trending from "../components/Trending";
 import Media from "../components/Media";
 import SearchBar from "../components/SearchBar";
 import Loading from "../components/Loading";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useMovies } from "../contexts/MoviesContext";
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../contexts/UserContext";
 
 const HomePage = function () {
-  const { user } = useUser();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!user) navigate("/login");
-  }, [user]);
-
-  if (!user) return null;
-
   const { data } = useMovies();
   const movies = data.filter((movie) => !movie.isTrending);
 

@@ -22,8 +22,6 @@ function reducer(state, action) {
       return { ...state, error: null };
 
     case "login": {
-      const userExists = state.allUsers.some((user) => user.email === action?.payload?.loginEmail);
-
       const user = state.allUsers.find((user) => user.email === action?.payload?.loginEmail);
 
       if (!user) {
@@ -66,20 +64,32 @@ const UserContext = createContext();
 
 function UserProvider({ children }) {
   const [{ currentUser: user, isLoading, error }, dispatch] = useReducer(reducer, initialState);
+
   const clearError = () => dispatch({ type: "clear_error" });
+
+  // // // // // // // // // // // // // // // // // // // //
 
   const login = (userData) => {
     dispatch({ type: "loading_true" });
-
     setTimeout(() => {
       dispatch({ type: "login", payload: userData });
       dispatch({ type: "loading_false" });
-    }, 1000);
+    }, 500);
   };
 
-  const logOut = () => dispatch({ type: "logout" });
+  // // // // // // // // // // // // // // // // // // // //
 
-  async function fetchAvatar(dispatch, newUser) {
+  const logOut = () => {
+    dispatch({ type: "loading_true" });
+    setTimeout(() => {
+      dispatch({ type: "logout" });
+      dispatch({ type: "loading_false" });
+    }, 250);
+  };
+
+  // // // // // // // // // // // // // // // // // // // //
+
+  async function fetchAvatar(newUser) {
     dispatch({ type: "loading_true" });
 
     try {
@@ -92,27 +102,30 @@ function UserProvider({ children }) {
       setTimeout(() => {
         dispatch({ type: "signup", payload: newUser });
         dispatch({ type: "loading_false" });
-      }, 1000);
+      }, 750);
     } catch (err) {
       setTimeout(() => {
         dispatch({ type: "error", payload: "Something went wrong" });
         dispatch({ type: "loading_false" });
-      }, 1000);
+      }, 750);
     }
   }
 
   const signUp = (newUser) => {
-    fetchAvatar(dispatch, { email: newUser.signupEmail, password: newUser.signupPassword });
+    fetchAvatar({ email: newUser.signupEmail, password: newUser.signupPassword });
   };
+
+  // // // // // // // // // // // // // // // // // // // //
 
   const deleteUser = (email) => {
     dispatch({ type: "loading_true" });
-
     setTimeout(() => {
       dispatch({ type: "delete_user", payload: email });
       dispatch({ type: "loading_false" });
     }, 500);
   };
+
+  // // // // // // // // // // // // // // // // // // // //
 
   return <UserContext.Provider value={{ user, login, logOut, signUp, deleteUser, isLoading, error, clearError }}>{children}</UserContext.Provider>;
 }

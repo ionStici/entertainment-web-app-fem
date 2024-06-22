@@ -8,16 +8,10 @@ import toast from "react-hot-toast";
 
 function LoginPage() {
   const { pathname: path } = useLocation();
+  const isLogin = path === "/login";
 
   const navigate = useNavigate();
-  const goHome = () => navigate("/");
-  const goLogin = () => navigate("/login");
-
-  useEffect(() => {
-    if (path === "/") goLogin();
-  }, [path]);
-
-  const isLogin = path === "/login";
+  const goHome = () => navigate("/home");
 
   const { user, error, clearError, login, signUp, isLoading } = useUser();
 
@@ -43,12 +37,10 @@ function LoginPage() {
     mode: "onSuccess",
     reValidateMode: "onSubmit",
   });
-
   const { errors } = formState;
 
   const onSuccess = (data) => {
     const { loginEmail, loginPassword, signupEmail, signupPassword } = data;
-
     if (isLogin) login({ loginEmail, loginPassword });
     if (!isLogin) signUp({ signupEmail, signupPassword });
   };

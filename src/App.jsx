@@ -8,7 +8,7 @@ import ErrorPage from "./pages/ErrorPage";
 import AuthPage from "./pages/AuthPage";
 
 const router = createBrowserRouter([
-  { path: "/", element: <AuthPage />, errorElement: <ErrorPage /> },
+  { path: "/", element: <HomePage />, errorElement: <ErrorPage /> },
   { path: "/home", element: <HomePage /> },
   { path: "/movies", element: <MoviesPage /> },
   { path: "/series", element: <SeriesPage /> },

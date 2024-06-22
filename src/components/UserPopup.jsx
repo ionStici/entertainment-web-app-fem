@@ -17,7 +17,7 @@ function UserPopup({ setIsOpen }) {
 
   const handleLogOut = () => {
     logOut();
-    setIsOpen(false);
+    setTimeout(() => setIsOpen(false), 250);
   };
 
   const handleClose = () => {
@@ -45,7 +45,7 @@ function UserPopup({ setIsOpen }) {
 
         <p className={styles.email}>{user?.email}</p>
 
-        <button className={`${styles.btn} ${styles.btn_logout}`} onClick={handleLogOut}>
+        <button className={`${styles.btn} ${styles.btn_logout}`} onClick={handleLogOut} disabled={isLoading}>
           <TbLogout />
           <span>Log Out</span>
         </button>
