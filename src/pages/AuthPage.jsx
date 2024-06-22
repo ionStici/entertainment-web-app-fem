@@ -3,12 +3,13 @@ import styles from "./../styles/AuthPage.module.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ErrorMessage from "../ui/ErrorMessage";
 import { useEffect } from "react";
+import { useUser } from "../contexts/UserContext";
 
 function LoginPage() {
   const { pathname: path } = useLocation();
   const isLogin = path === "/login";
 
-  let user, login, signUp, isLoading;
+  const { user, error, login, signUp, isLoading } = useUser();
 
   useEffect(() => {
     if (user) goHome();
@@ -63,7 +64,7 @@ function LoginPage() {
                 placeholder="Email address"
                 disabled={isLoading}
               />
-              <ErrorMessage message={errors?.loginEmail?.message} />
+              <ErrorMessage message={errors?.loginEmail?.message} classes={styles.error_message} />
             </div>
           )}
 
@@ -77,7 +78,7 @@ function LoginPage() {
                 placeholder="Password"
                 disabled={isLoading}
               />
-              <ErrorMessage message={errors?.loginPassword?.message} />
+              <ErrorMessage message={errors?.loginPassword?.message} classes={styles.error_message} />
             </div>
           )}
 
@@ -94,7 +95,7 @@ function LoginPage() {
                 placeholder="Email address"
                 disabled={isLoading}
               />
-              <ErrorMessage message={errors?.signupEmail?.message} />
+              <ErrorMessage message={errors?.signupEmail?.message} classes={styles.error_message} />
             </div>
           )}
 
@@ -108,7 +109,7 @@ function LoginPage() {
                 placeholder="Password"
                 disabled={isLoading}
               />
-              {errors?.signupPassword?.message && <span className={styles.error_text}>{errors.signupPassword.message}</span>}
+              <ErrorMessage message={errors?.signupPassword?.message} classes={styles.error_message} />
             </div>
           )}
 
@@ -125,9 +126,13 @@ function LoginPage() {
                 placeholder="Repeat Password"
                 disabled={isLoading}
               />
-              <ErrorMessage message={errors?.repeatPassword?.message} />
+              <ErrorMessage message={errors?.repeatPassword?.message} classes={styles.error_message} />
             </div>
           )}
+
+          <div>
+            <ErrorMessage message={error} classes={styles.error_login} />
+          </div>
 
           <button disabled={isLoading}>{isLogin ? "Login to your account" : "Create an account"}</button>
         </form>
@@ -136,8 +141,6 @@ function LoginPage() {
           <p>{isLogin ? "Don’t have an account?" : "Already have an account?"}</p>
           <Link to={isLogin ? "/signup" : "/login"}>{isLogin ? "Sign Up" : "Login"}</Link>
         </div>
-
-        {isLoading && <div className={styles.spinner}></div>}
       </div>
     </section>
   );

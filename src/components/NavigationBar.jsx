@@ -5,9 +5,10 @@ import { ReactSVG } from "react-svg";
 import { FaUserCircle } from "react-icons/fa";
 import { useState } from "react";
 import UserPopup from "./UserPopup";
+import { useUser } from "../contexts/UserContext";
 
 const NavigationBar = function () {
-  let user;
+  const { user } = useUser();
 
   const [isOpen, setIsOpen] = useState(false);
 
