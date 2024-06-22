@@ -86,8 +86,8 @@
 
     &:disabled {
       color: var(--color-grey-blue);
-      cursor: default;
       border-color: var(--color-grey-blue);
+      cursor: default;
     }
   }
 
@@ -143,21 +143,6 @@
   background-color: var(--color-semi-dark-blue);
   padding: 10px;
   pointer-events: none;
-}
-
-.error_login {
-  font-size: 13px;
-  font-weight: 300;
-  color: var(--color-red);
-
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 5px;
-
-  @media only screen and (min-width: 1100px) {
-    top: 0;
-  }
 }
 
 .text_box {

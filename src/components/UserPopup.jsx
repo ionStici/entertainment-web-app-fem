@@ -4,9 +4,11 @@ import { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { TbLogout } from "react-icons/tb";
 import { MdDeleteOutline } from "react-icons/md";
+import { useUser } from "../contexts/UserContext";
 
 function UserPopup({ setIsOpen }) {
-  let user, logOut;
+  const { user, logOut, deleteUser, isLoading } = useUser();
+  if (!user) return null;
 
   useEffect(() => {
     document.body.classList.add("hidden");
@@ -14,6 +16,7 @@ function UserPopup({ setIsOpen }) {
   }, []);
 
   const handleLogOut = () => {
+    logOut();
     setIsOpen(false);
   };
 
@@ -22,7 +25,8 @@ function UserPopup({ setIsOpen }) {
   };
 
   const handleDelete = () => {
-    setIsOpen(false);
+    deleteUser(user.email);
+    setTimeout(() => setIsOpen(false), 500);
   };
 
   return createPortal(
@@ -34,19 +38,19 @@ function UserPopup({ setIsOpen }) {
 
         <div className={styles.user_box}>
           <div>
-            <img src={"assets/image-avatar.png"} alt="User Image" />
+            <img src={user?.avatar} alt="User Image" />
           </div>
           <p>Premium User</p>
         </div>
 
-        <p className={styles.email}>{"funny_guy@hi.net"}</p>
+        <p className={styles.email}>{user?.email}</p>
 
         <button className={`${styles.btn} ${styles.btn_logout}`} onClick={handleLogOut}>
           <TbLogout />
           <span>Log Out</span>
         </button>
 
-        <button className={`${styles.btn} ${styles.btn_delete}`} onClick={handleDelete}>
+        <button className={`${styles.btn} ${styles.btn_delete}`} onClick={handleDelete} disabled={isLoading}>
           <MdDeleteOutline />
           <span>Delete User</span>
         </button>

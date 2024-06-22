@@ -114,6 +114,12 @@
     background-color: var(--color-white);
     color: var(--color-semi-dark-blue);
   }
+
+  &:disabled {
+    color: var(--color-grey-blue);
+    background-color: var(--color-dark-blue);
+    cursor: default;
+  }
 }
 
 .btn_logout {

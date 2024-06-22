@@ -4,19 +4,33 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import ErrorMessage from "../ui/ErrorMessage";
 import { useEffect } from "react";
 import { useUser } from "../contexts/UserContext";
+import toast from "react-hot-toast";
 
 function LoginPage() {
   const { pathname: path } = useLocation();
+
+  const navigate = useNavigate();
+  const goHome = () => navigate("/");
+  const goLogin = () => navigate("/login");
+
+  useEffect(() => {
+    if (path === "/") goLogin();
+  }, [path]);
+
   const isLogin = path === "/login";
 
-  const { user, error, login, signUp, isLoading } = useUser();
+  const { user, error, clearError, login, signUp, isLoading } = useUser();
 
   useEffect(() => {
     if (user) goHome();
   }, [user]);
 
-  const navigate = useNavigate();
-  const goHome = () => navigate("/");
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      clearError();
+    }
+  }, [error]);
 
   const { register, handleSubmit, formState, getValues } = useForm({
     defaultValues: {
@@ -129,10 +143,6 @@ function LoginPage() {
               <ErrorMessage message={errors?.repeatPassword?.message} classes={styles.error_message} />
             </div>
           )}
-
-          <div>
-            <ErrorMessage message={error} classes={styles.error_login} />
-          </div>
 
           <button disabled={isLoading}>{isLogin ? "Login to your account" : "Create an account"}</button>
         </form>
