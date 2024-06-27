@@ -3,12 +3,16 @@ import { useMovies } from "../contexts/MoviesContext";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import { FaUserCircle } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserPopup from "./UserPopup";
 import { useUser } from "../contexts/UserContext";
 
 const NavigationBar = function () {
-  const { user } = useUser();
+  const { user, feedback, handleFeedback } = useUser();
+
+  useEffect(() => {
+    if (feedback) handleFeedback();
+  }, [feedback]);
 
   const [isOpen, setIsOpen] = useState(false);
 

@@ -13,18 +13,13 @@ function LoginPage() {
   const navigate = useNavigate();
   const goHome = () => navigate("/home");
 
-  const { user, error, clearError, login, signUp, isLoading } = useUser();
+  const { user, login, signUp, isLoading, feedback, error, handleError, handleFeedback } = useUser();
 
   useEffect(() => {
+    if (error) handleError();
+    if (feedback) handleFeedback();
     if (user) goHome();
-  }, [user]);
-
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      clearError();
-    }
-  }, [error]);
+  }, [user, feedback, error]);
 
   const { register, handleSubmit, formState, getValues } = useForm({
     defaultValues: {
@@ -49,7 +44,7 @@ function LoginPage() {
 
   return (
     <section className={styles.section}>
-      <Link className={styles.logo_box} to="/">
+      <Link className={styles.logo_box} to="/home">
         <img src="assets/logo.svg" />
       </Link>
 

@@ -1,10 +1,12 @@
 import { createContext, useContext, useReducer } from "react";
+import toast from "react-hot-toast";
 
 const initialState = {
   currentUser: null,
   allUsers: [{ email: "movie_lover@me.mov", password: "mysecretpassword", avatar: "assets/image-avatar.png" }],
-  isLoading: false,
+  feedback: null,
   error: null,
+  isLoading: false,
 };
 
 function reducer(state, action) {
@@ -15,28 +17,38 @@ function reducer(state, action) {
     case "loading_false":
       return { ...state, isLoading: false };
 
+    case "feedback":
+      return { ...state, feedback: action.payload };
+
+    case "clear_feedback":
+      return { ...state, feedback: null };
+
     case "error":
       return { ...state, error: action.payload };
 
     case "clear_error":
       return { ...state, error: null };
 
+    // // // // // // // // // // // // // // // // // // // //
+
     case "login": {
-      const user = state.allUsers.find((user) => user.email === action?.payload?.loginEmail);
+      const user = state.allUsers.find((user) => user.email === action.payload.loginEmail);
 
       if (!user) {
         return { ...state, error: "User not found" };
       }
 
-      if (user?.password === action?.payload?.loginPassword) {
-        return { ...state, currentUser: user };
+      if (user?.password === action.payload.loginPassword) {
+        return { ...state, currentUser: user, feedback: "You are successfully logged in" };
       }
 
       return { ...state, error: "Invalid email or password" };
     }
 
     case "logout":
-      return { ...state, currentUser: null };
+      return { ...state, currentUser: null, feedback: "You have been successfully logged out" };
+
+    // // // // // // // // // // // // // // // // // // // //
 
     case "signup": {
       const userExists = state.allUsers.some((user) => user.email === action.payload.email);
@@ -50,27 +62,36 @@ function reducer(state, action) {
       return { ...state, currentUser: null, allUsers };
     }
 
-    case "log": {
-      console.log(state);
-      return { ...state };
-    }
-
     default:
       throw new Error("Unknown Action");
   }
 }
 
+// // // // // // // // // // // // // // // // // // // //
+
 const UserContext = createContext();
 
 function UserProvider({ children }) {
-  const [{ currentUser: user, isLoading, error }, dispatch] = useReducer(reducer, initialState);
+  const [{ currentUser: user, isLoading, feedback, error }, dispatch] = useReducer(reducer, initialState);
 
   const clearError = () => dispatch({ type: "clear_error" });
+  const clearFeedback = () => dispatch({ type: "clear_feedback" });
+
+  const handleFeedback = () => {
+    toast.success(feedback);
+    clearFeedback();
+  };
+
+  const handleError = () => {
+    toast.error(error);
+    clearError();
+  };
 
   // // // // // // // // // // // // // // // // // // // //
 
   const login = (userData) => {
     dispatch({ type: "loading_true" });
+
     setTimeout(() => {
       dispatch({ type: "login", payload: userData });
       dispatch({ type: "loading_false" });
@@ -81,6 +102,7 @@ function UserProvider({ children }) {
 
   const logOut = () => {
     dispatch({ type: "loading_true" });
+
     setTimeout(() => {
       dispatch({ type: "logout" });
       dispatch({ type: "loading_false" });
@@ -127,7 +149,26 @@ function UserProvider({ children }) {
 
   // // // // // // // // // // // // // // // // // // // //
 
-  return <UserContext.Provider value={{ user, login, logOut, signUp, deleteUser, isLoading, error, clearError }}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider
+      value={{
+        user,
+        login,
+        logOut,
+        signUp,
+        deleteUser,
+        isLoading,
+        feedback,
+        clearFeedback,
+        error,
+        clearError,
+        handleError,
+        handleFeedback,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 }
 
 export function useUser() {
