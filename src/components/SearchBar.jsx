@@ -1,7 +1,7 @@
 import styles from "./../styles/SearchBar.module.scss";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = function ({ focus = false, handleSearch }) {
+const SearchBar = function ({ focus = false, query, setQuery }) {
   const navigate = useNavigate();
   const goToSearch = () => navigate("/search");
 
@@ -16,9 +16,10 @@ const SearchBar = function ({ focus = false, handleSearch }) {
             placeholder="Search for movies or TV series"
             id="Search"
             spellCheck="false"
-            onChange={(e) => handleSearch?.(e)}
-            autoFocus={focus ? true : undefined}
             autoComplete="off"
+            autoFocus={focus}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
         </label>
       </form>

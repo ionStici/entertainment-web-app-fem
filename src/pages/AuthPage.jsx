@@ -24,7 +24,7 @@ function LoginPage() {
     defaultValues: {
       loginEmail: "movie_lover@me.mov",
       loginPassword: "mysecretpassword",
-      signupEmail: "funny_guy@hi.net",
+      signupEmail: "dreamer_x0@hi.net",
       signupPassword: "1234567890abc",
       repeatPassword: "1234567890abc",
     },
