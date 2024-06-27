@@ -1,10 +1,10 @@
 import styles from "./../styles/Media.module.scss";
-import { useMovies } from "../contexts/MoviesContext";
+import { useUser } from "../contexts/UserContext";
 
 const Media = function ({ movies, loading, title }) {
   if (!movies) return null;
 
-  const { toggleBookmark } = useMovies();
+  const { toggleBookmark } = useUser();
 
   const handleBookmarkClick = function ({ target }) {
     toggleBookmark(target.dataset.movie);

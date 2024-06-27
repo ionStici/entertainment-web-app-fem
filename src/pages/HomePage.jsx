@@ -4,10 +4,12 @@ import Media from "../components/Media";
 import SearchBar from "../components/SearchBar";
 import Loading from "../components/Loading";
 import { useRef, useState } from "react";
-import { useMovies } from "../contexts/MoviesContext";
+import { useUser } from "../contexts/UserContext";
 
 const HomePage = function () {
-  const { data } = useMovies();
+  const { data } = useUser();
+
+  const trending = data.filter((movie) => movie.isTrending);
   const movies = data.filter((movie) => !movie.isTrending);
 
   const [hide, setHide] = useState(false);
@@ -22,7 +24,7 @@ const HomePage = function () {
     <Layout>
       <Loading hide={hide} />
       <SearchBar />
-      <Trending loading={loading} />
+      <Trending trending={trending} loading={loading} />
       <Media movies={movies} loading={loading} title="Recommended for you" />
     </Layout>
   );

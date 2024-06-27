@@ -7,7 +7,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useUser } from "../contexts/UserContext";
 
 function UserPopup({ setIsOpen }) {
-  const { user, logOut, deleteUser, isLoading, toggleBookmark, log } = useUser();
+  const { user, logOut, deleteUser, isLoading } = useUser();
   if (!user) return null;
 
   useEffect(() => {
@@ -40,14 +40,7 @@ function UserPopup({ setIsOpen }) {
           <div>
             <img src={user?.avatar} alt="User Image" />
           </div>
-          <p
-            onClick={() => {
-              toggleBookmark("Beyond Earth");
-              log();
-            }}
-          >
-            Premium User
-          </p>
+          <p>Premium User</p>
         </div>
 
         <p className={styles.email}>{user?.email}</p>

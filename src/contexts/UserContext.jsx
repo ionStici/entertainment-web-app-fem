@@ -1,10 +1,11 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { movies } from "./movies";
 import { cloneDeep } from "lodash";
 import toast from "react-hot-toast";
 
 const initialState = {
   currentUser: null,
+  defaultMovies: cloneDeep(movies),
   allUsers: [{ email: "movie_lover@me.mov", password: "mysecretpassword", avatar: "assets/image-avatar.png", movies: cloneDeep(movies) }],
   feedback: null,
   error: null,
@@ -31,8 +32,6 @@ function reducer(state, action) {
     case "clear_error":
       return { ...state, error: null };
 
-    // // // // // // // // // // // // // // // // // // // //
-
     case "login": {
       const user = state.allUsers.find((user) => user.email === action.payload.loginEmail);
 
@@ -49,8 +48,6 @@ function reducer(state, action) {
 
     case "logout":
       return { ...state, currentUser: null, feedback: "You have been successfully logged out" };
-
-    // // // // // // // // // // // // // // // // // // // //
 
     case "signup": {
       const userExists = state.allUsers.some((user) => user.email === action.payload.email);
@@ -69,10 +66,21 @@ function reducer(state, action) {
       return { ...state, currentUser: null, allUsers, feedback: "Account deleted successfully" };
     }
 
-    // // // // // // // // // // // // // // // // // // // //
-
     case "bookmark": {
       let message = "";
+
+      if (!state.currentUser) {
+        const newMovies = state.defaultMovies.map((movie) => {
+          if (movie.title === action.payload) {
+            if (!movie.isBookmarked) message = "Bookmark added";
+            if (movie.isBookmarked) message = "Bookmark removed";
+
+            return { ...movie, isBookmarked: !movie.isBookmarked };
+          } else return movie;
+        });
+
+        return { ...state, defaultMovies: newMovies, feedback: message };
+      }
 
       const newMovies = state.currentUser.movies.map((movie) => {
         if (movie.title === action.payload) {
@@ -97,28 +105,21 @@ function reducer(state, action) {
       };
     }
 
-    case "log": {
-      console.log(state);
-      return state;
-    }
-
     default:
       throw new Error("Unknown Action");
   }
 }
 
-// // // // // // // // // // // // // // // // // // // //
-
 const UserContext = createContext();
 
 function UserProvider({ children }) {
-  const [{ currentUser: user, isLoading, feedback, error }, dispatch] = useReducer(reducer, initialState);
+  const [{ currentUser: user, defaultMovies, isLoading, feedback, error }, dispatch] = useReducer(reducer, initialState);
 
   const clearError = () => dispatch({ type: "clear_error" });
   const clearFeedback = () => dispatch({ type: "clear_feedback" });
 
   const handleFeedback = () => {
-    toast.success(feedback, { style: { minWidth: 200 } });
+    toast.success(feedback, { style: { minWidth: 200, textAlign: "center" } });
     clearFeedback();
   };
 
@@ -126,8 +127,6 @@ function UserProvider({ children }) {
     toast.error(error);
     clearError();
   };
-
-  // // // // // // // // // // // // // // // // // // // //
 
   const login = (userData) => {
     dispatch({ type: "loading_true" });
@@ -146,8 +145,6 @@ function UserProvider({ children }) {
       dispatch({ type: "loading_false" });
     }, 250);
   };
-
-  // // // // // // // // // // // // // // // // // // // //
 
   async function fetchAvatar(newUser) {
     dispatch({ type: "loading_true" });
@@ -187,18 +184,18 @@ function UserProvider({ children }) {
     }, 500);
   };
 
-  // // // // // // // // // // // // // // // // // // // //
-
   const toggleBookmark = (title) => {
     dispatch({ type: "bookmark", payload: title });
   };
 
-  const log = () => dispatch({ type: "log" });
+  let data = user ? user.movies : defaultMovies;
 
   return (
     <UserContext.Provider
       value={{
         user,
+        data,
+        toggleBookmark,
         isLoading,
         login,
         logOut,
@@ -208,8 +205,6 @@ function UserProvider({ children }) {
         error,
         handleError,
         handleFeedback,
-        toggleBookmark,
-        log,
       }}
     >
       {children}

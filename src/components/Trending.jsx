@@ -1,10 +1,9 @@
 import styles from "./../styles/Trending.module.scss";
-import { useMovies } from "../contexts/MoviesContext";
+import { useUser } from "../contexts/UserContext";
 
-const Trending = function ({ loading }) {
-  const { data, toggleBookmark } = useMovies();
+const Trending = function ({ trending, loading }) {
+  const { toggleBookmark } = useUser();
 
-  const trending = data.filter((movie) => movie.isTrending);
   if (!trending) return null;
 
   const handleToggleBookmark = ({ target }) => {

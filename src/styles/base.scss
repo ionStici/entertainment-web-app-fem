@@ -61,6 +61,10 @@ main {
   }
 }
 
+.hidden {
+  overflow: hidden;
+}
+
 .error {
   text-align: center;
   padding: 100px 10px;
@@ -86,8 +90,4 @@ main {
       text-decoration: none;
     }
   }
-}
-
-.hidden {
-  overflow: hidden;
 }
