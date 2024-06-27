@@ -2,12 +2,10 @@ import styles from "./../styles/Trending.module.scss";
 import { useMovies } from "../contexts/MoviesContext";
 
 const Trending = function ({ loading }) {
-  const { data, toggleBookmark, icons } = useMovies();
+  const { data, toggleBookmark } = useMovies();
 
   const trending = data.filter((movie) => movie.isTrending);
   if (!trending) return null;
-
-  const { bookmarkEmpty, bookmarkFull, categoryMovie, categoryTv, iconPlay } = icons;
 
   const handleToggleBookmark = ({ target }) => {
     toggleBookmark(target.dataset.movie);
@@ -35,13 +33,16 @@ const Trending = function ({ loading }) {
                 </picture>
 
                 <button className={styles.bookmark_button} onClick={handleToggleBookmark} aria-label="Bookmark" data-movie={movie.title}>
-                  <img src={movie.isBookmarked ? bookmarkFull : bookmarkEmpty} alt="Bookmark" />
+                  <img src={movie.isBookmarked ? "assets/icon-bookmark-full.svg" : "assets/icon-bookmark-empty.svg"} alt="Bookmark" />
                 </button>
 
                 <div className={styles.box_details}>
                   <p>{movie.year}</p>
                   <p>
-                    <img src={movie.category === "Movie" ? categoryMovie : categoryTv} alt={movie.category} />
+                    <img
+                      src={movie.category === "Movie" ? "assets/icon-category-movie.svg" : "assets/icon-category-tv.svg"}
+                      alt={movie.category}
+                    />
                     <span>{movie.category}</span>
                   </p>
                   <p>{movie.rating}</p>
@@ -50,7 +51,7 @@ const Trending = function ({ loading }) {
                 <h2 className={styles.movie_title}>{movie.title}</h2>
 
                 <button className={styles.play}>
-                  <img src={iconPlay} alt="Play" />
+                  <img src="assets/icon-play.svg" alt="Play" />
                   <p>Play</p>
                 </button>
               </div>

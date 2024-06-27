@@ -1,12 +1,7 @@
 import styles from "./../styles/SearchBar.module.scss";
 import { useNavigate } from "react-router-dom";
-import { useMovies } from "../contexts/MoviesContext";
 
 const SearchBar = function ({ focus = false, handleSearch }) {
-  const {
-    icons: { iconSearch },
-  } = useMovies();
-
   const navigate = useNavigate();
   const goToSearch = () => navigate("/search");
 
@@ -14,7 +9,7 @@ const SearchBar = function ({ focus = false, handleSearch }) {
     <div className={styles.wrapper} onClick={goToSearch}>
       <form onSubmit={(e) => e.preventDefault()}>
         <label className={styles.label} htmlFor="Search">
-          <img className={styles.icon} src={iconSearch} alt="Search" />
+          <img className={styles.icon} src="assets/icon-search.svg" alt="Search" />
           <input
             type="text"
             className={styles.input}

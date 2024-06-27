@@ -1,9 +1,11 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
+import { movies } from "./movies";
+import { cloneDeep } from "lodash";
 import toast from "react-hot-toast";
 
 const initialState = {
   currentUser: null,
-  allUsers: [{ email: "movie_lover@me.mov", password: "mysecretpassword", avatar: "assets/image-avatar.png" }],
+  allUsers: [{ email: "movie_lover@me.mov", password: "mysecretpassword", avatar: "assets/image-avatar.png", movies: cloneDeep(movies) }],
   feedback: null,
   error: null,
   isLoading: false,
@@ -67,6 +69,39 @@ function reducer(state, action) {
       return { ...state, currentUser: null, allUsers, feedback: "Account deleted successfully" };
     }
 
+    // // // // // // // // // // // // // // // // // // // //
+
+    case "bookmark": {
+      let message = "";
+
+      const newMovies = state.currentUser.movies.map((movie) => {
+        if (movie.title === action.payload) {
+          if (!movie.isBookmarked) message = "Bookmark added";
+          if (movie.isBookmarked) message = "Bookmark removed";
+
+          return { ...movie, isBookmarked: !movie.isBookmarked };
+        } else return movie;
+      });
+
+      const allUsers = state.allUsers.map((user) => {
+        if (user.email === state.currentUser.email) {
+          return { ...user, movies: newMovies };
+        } else return user;
+      });
+
+      return {
+        ...state,
+        currentUser: { ...state.currentUser, movies: newMovies },
+        allUsers,
+        feedback: message,
+      };
+    }
+
+    case "log": {
+      console.log(state);
+      return state;
+    }
+
     default:
       throw new Error("Unknown Action");
   }
@@ -83,7 +118,7 @@ function UserProvider({ children }) {
   const clearFeedback = () => dispatch({ type: "clear_feedback" });
 
   const handleFeedback = () => {
-    toast.success(feedback);
+    toast.success(feedback, { style: { minWidth: 200 } });
     clearFeedback();
   };
 
@@ -121,8 +156,7 @@ function UserProvider({ children }) {
       const res = await fetch("https://randomuser.me/api/");
       const data = await res.json();
 
-      const avatar = data.results[0].picture.large;
-      newUser.avatar = avatar;
+      newUser.avatar = data.results[0].picture.large;
 
       setTimeout(() => {
         dispatch({ type: "signup", payload: newUser });
@@ -137,7 +171,11 @@ function UserProvider({ children }) {
   }
 
   const signUp = (newUser) => {
-    fetchAvatar({ email: newUser.signupEmail, password: newUser.signupPassword });
+    fetchAvatar({
+      email: newUser.signupEmail,
+      password: newUser.signupPassword,
+      movies: cloneDeep(movies),
+    });
   };
 
   const deleteUser = (email) => {
@@ -150,6 +188,12 @@ function UserProvider({ children }) {
   };
 
   // // // // // // // // // // // // // // // // // // // //
+
+  const toggleBookmark = (title) => {
+    dispatch({ type: "bookmark", payload: title });
+  };
+
+  const log = () => dispatch({ type: "log" });
 
   return (
     <UserContext.Provider
@@ -164,6 +208,8 @@ function UserProvider({ children }) {
         error,
         handleError,
         handleFeedback,
+        toggleBookmark,
+        log,
       }}
     >
       {children}

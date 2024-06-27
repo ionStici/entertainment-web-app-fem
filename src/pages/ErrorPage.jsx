@@ -5,7 +5,7 @@ function ErrorPage() {
     <div className="error">
       <h1>404 error</h1>
       <p>This page doesn't exist.</p>
-      <Link to="/">Back to Home</Link>
+      <Link to="/home">Back to Home</Link>
     </div>
   );
 }

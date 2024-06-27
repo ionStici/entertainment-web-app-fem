@@ -24,7 +24,7 @@ const NavigationBar = function () {
   };
 
   const pages = [
-    { page: "/", icon: "assets/icon-nav-home.svg" },
+    { page: "/home", icon: "assets/icon-nav-home.svg" },
     { page: "/movies", icon: "assets/icon-nav-movies.svg" },
     { page: "/series", icon: "assets/icon-nav-tv-series.svg" },
     { page: "/bookmarks", icon: "assets/icon-nav-bookmark.svg" },
@@ -35,7 +35,7 @@ const NavigationBar = function () {
       {isOpen && <UserPopup setIsOpen={setIsOpen} />}
 
       <div className={styles.wrapper}>
-        <Link className={styles.logo_link} to="/">
+        <Link className={styles.logo_link} to="/home">
           <img src={"assets/logo.svg"} alt="logo" />
         </Link>
 

@@ -10,8 +10,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <UserProvider>
       <MoviesProvider>
-        <Toaster />
         <App />
+        <Toaster />
       </MoviesProvider>
     </UserProvider>
   </React.StrictMode>

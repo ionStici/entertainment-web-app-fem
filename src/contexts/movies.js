@@ -1,32 +1,4 @@
-import { createContext, useContext, useState } from "react";
-
-const MoviesContext = createContext();
-
-function MoviesProvider({ children }) {
-  const [data, setData] = useState(movies);
-
-  const toggleBookmark = function (title) {
-    setData((movies) => {
-      return movies.map((movie) => {
-        if (movie.title === title) {
-          return { ...movie, isBookmarked: !movie.isBookmarked };
-        } else return movie;
-      });
-    });
-  };
-
-  return <MoviesContext.Provider value={{ data, toggleBookmark }}>{children}</MoviesContext.Provider>;
-}
-
-export function useMovies() {
-  const context = useContext(MoviesContext);
-  if (!context) throw new Error("MoviesContext Error");
-  return context;
-}
-
-export default MoviesProvider;
-
-const movies = [
+export const movies = [
   {
     title: "Beyond Earth",
     thumbnail: {
