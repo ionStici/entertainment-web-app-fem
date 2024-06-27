@@ -4,10 +4,10 @@ import Loading from "../components/Loading";
 import SearchBar from "../components/SearchBar";
 import Media from "../components/Media";
 import { useEffect, useState, useRef } from "react";
-import { useMovies } from "../contexts/MoviesContext";
+import { useUser } from "../contexts/UserContext";
 
 const BookmarksPage = function () {
-  const { data } = useMovies();
+  const { data } = useUser();
 
   const moviesTitle = "Bookmarked Movies";
   const movies = data.filter((movie) => movie.isBookmarked && movie.category === "Movie");

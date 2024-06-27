@@ -2,9 +2,9 @@ import styles from "./../styles/Trending.module.scss";
 import { useUser } from "../contexts/UserContext";
 
 const Trending = function ({ trending, loading }) {
-  const { toggleBookmark } = useUser();
-
   if (!trending) return null;
+
+  const { toggleBookmark } = useUser();
 
   const handleToggleBookmark = ({ target }) => {
     toggleBookmark(target.dataset.movie);

@@ -9,7 +9,15 @@
     margin: 0;
     grid-column: 2 / 3;
     grid-row: 2 / 3;
+
     overflow: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 

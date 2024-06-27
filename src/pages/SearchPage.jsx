@@ -1,11 +1,11 @@
 import Layout from "../components/Layout";
 import SearchBar from "../components/SearchBar";
 import Media from "../components/Media";
-import { useMovies } from "../contexts/MoviesContext";
 import { useState } from "react";
+import { useUser } from "../contexts/UserContext";
 
 const SearchPage = function () {
-  const { data } = useMovies();
+  const { data } = useUser();
 
   const [title, setTitle] = useState("Type into the search bar for a quick lookup ;)");
   const [movies, setMovies] = useState([]);

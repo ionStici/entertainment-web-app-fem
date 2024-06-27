@@ -3,10 +3,10 @@ import Loading from "../components/Loading";
 import SearchBar from "../components/SearchBar";
 import Media from "../components/Media";
 import { useState, useRef } from "react";
-import { useMovies } from "../contexts/MoviesContext";
+import { useUser } from "../contexts/UserContext";
 
 const SeriesPage = function () {
-  const { data } = useMovies();
+  const { data } = useUser();
   const movies = data.filter((movie) => movie.category === "TV Series");
 
   const [hide, setHide] = useState(false);

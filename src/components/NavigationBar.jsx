@@ -1,10 +1,10 @@
 import styles from "./../styles/NavigationBar.module.scss";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import { ReactSVG } from "react-svg";
-import { FaUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import UserPopup from "./UserPopup";
+import { FaUserCircle } from "react-icons/fa";
+import { ReactSVG } from "react-svg";
 import { useUser } from "../contexts/UserContext";
+import UserPopup from "./UserPopup";
 
 const NavigationBar = function () {
   const { user, feedback, handleFeedback } = useUser();

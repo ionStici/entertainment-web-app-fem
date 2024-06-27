@@ -57,7 +57,7 @@ function reducer(state, action) {
         ...state,
         currentUser: action.payload,
         allUsers: [...state.allUsers, action.payload],
-        feedback: "You have successfully registered and logged in",
+        feedback: "You have signed up successfully",
       };
     }
 
@@ -119,7 +119,7 @@ function UserProvider({ children }) {
   const clearFeedback = () => dispatch({ type: "clear_feedback" });
 
   const handleFeedback = () => {
-    toast.success(feedback, { style: { minWidth: 200, textAlign: "center" } });
+    toast.success(feedback, { style: { minWidth: 200 } });
     clearFeedback();
   };
 

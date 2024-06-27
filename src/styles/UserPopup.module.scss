@@ -1,3 +1,26 @@
+@keyframes pop-up {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  33% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .layout {
   width: 100vw;
   height: 120vh;
@@ -10,6 +33,8 @@
 
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2.5px);
+
+  animation: fade-in 0.25s;
 }
 
 .wrapper {
@@ -26,6 +51,8 @@
   @media only screen and (min-width: 768px) {
     border-radius: 20px;
   }
+
+  animation: pop-up 0.5s 0.2s both;
 }
 
 .btn_close {
