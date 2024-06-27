@@ -1,5 +1,4 @@
 import styles from "./../styles/NavigationBar.module.scss";
-import { useMovies } from "../contexts/MoviesContext";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import { FaUserCircle } from "react-icons/fa";
@@ -24,14 +23,11 @@ const NavigationBar = function () {
     if (user) setIsOpen(true);
   };
 
-  const { icons } = useMovies();
-  const { iconHome, iconMovies, iconSeries, iconBookmark, logo } = icons;
-
   const pages = [
-    { page: "/", icon: iconHome },
-    { page: "/movies", icon: iconMovies },
-    { page: "/series", icon: iconSeries },
-    { page: "/bookmarks", icon: iconBookmark },
+    { page: "/", icon: "assets/icon-nav-home.svg" },
+    { page: "/movies", icon: "assets/icon-nav-movies.svg" },
+    { page: "/series", icon: "assets/icon-nav-tv-series.svg" },
+    { page: "/bookmarks", icon: "assets/icon-nav-bookmark.svg" },
   ];
 
   return (
@@ -40,7 +36,7 @@ const NavigationBar = function () {
 
       <div className={styles.wrapper}>
         <Link className={styles.logo_link} to="/">
-          <img src={logo} alt="logo" />
+          <img src={"assets/logo.svg"} alt="logo" />
         </Link>
 
         <div className={styles.btns_wrapper}>

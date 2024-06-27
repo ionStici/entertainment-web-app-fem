@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import ErrorMessage from "../ui/ErrorMessage";
 import { useEffect } from "react";
 import { useUser } from "../contexts/UserContext";
-import toast from "react-hot-toast";
 
 function LoginPage() {
   const { pathname: path } = useLocation();

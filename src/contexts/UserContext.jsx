@@ -54,12 +54,17 @@ function reducer(state, action) {
       const userExists = state.allUsers.some((user) => user.email === action.payload.email);
       if (userExists) return { ...state, error: "User already exists" };
 
-      return { ...state, currentUser: action.payload, allUsers: [...state.allUsers, action.payload] };
+      return {
+        ...state,
+        currentUser: action.payload,
+        allUsers: [...state.allUsers, action.payload],
+        feedback: "You have successfully registered and logged in",
+      };
     }
 
     case "delete_user": {
       const allUsers = state.allUsers.filter((user) => user.email !== action.payload);
-      return { ...state, currentUser: null, allUsers };
+      return { ...state, currentUser: null, allUsers, feedback: "Account deleted successfully" };
     }
 
     default:
@@ -98,8 +103,6 @@ function UserProvider({ children }) {
     }, 500);
   };
 
-  // // // // // // // // // // // // // // // // // // // //
-
   const logOut = () => {
     dispatch({ type: "loading_true" });
 
@@ -137,10 +140,9 @@ function UserProvider({ children }) {
     fetchAvatar({ email: newUser.signupEmail, password: newUser.signupPassword });
   };
 
-  // // // // // // // // // // // // // // // // // // // //
-
   const deleteUser = (email) => {
     dispatch({ type: "loading_true" });
+
     setTimeout(() => {
       dispatch({ type: "delete_user", payload: email });
       dispatch({ type: "loading_false" });
@@ -153,15 +155,13 @@ function UserProvider({ children }) {
     <UserContext.Provider
       value={{
         user,
+        isLoading,
         login,
         logOut,
         signUp,
         deleteUser,
-        isLoading,
         feedback,
-        clearFeedback,
         error,
-        clearError,
         handleError,
         handleFeedback,
       }}
