@@ -13,10 +13,6 @@
   text-decoration: none;
   margin-bottom: 58px;
 
-  margin: 0 auto;
-  background-color: transparent;
-  border: none;
-
   @media only screen and (min-width: 768px) {
     margin-bottom: 72px;
   }
@@ -161,10 +157,9 @@
     margin-right: 10px;
   }
 
-  button {
+  a,
+  a:link,
+  a:visited {
     color: var(--color-red);
-    font-size: inherit;
-    border: none;
-    background-color: transparent;
   }
 }

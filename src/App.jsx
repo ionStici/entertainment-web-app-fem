@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { useRouter } from "./contexts/RouterContext";
 import HomePage from "./pages/HomePage";
 import MoviesPage from "./pages/MoviesPage";
 import SeriesPage from "./pages/SeriesPage";
@@ -7,19 +7,17 @@ import SearchPage from "./pages/SearchPage";
 import ErrorPage from "./pages/ErrorPage";
 import AuthPage from "./pages/AuthPage";
 
-const router = createBrowserRouter([
-  { path: "/", element: <HomePage />, errorElement: <ErrorPage /> },
-  { path: "/home", element: <HomePage /> },
-  { path: "/movies", element: <MoviesPage /> },
-  { path: "/series", element: <SeriesPage /> },
-  { path: "/bookmarks", element: <BookmarksPage /> },
-  { path: "/search", element: <SearchPage /> },
-  { path: "/login", element: <AuthPage /> },
-  { path: "/signup", element: <AuthPage /> },
-]);
-
 function App() {
-  return <RouterProvider router={router} />;
+  const { page } = useRouter();
+
+  if (page === "home") return <HomePage />;
+  if (page === "movies") return <MoviesPage />;
+  if (page === "series") return <SeriesPage />;
+  if (page === "bookmarks") return <BookmarksPage />;
+  if (page === "search") return <SearchPage />;
+  if (page === "login" || page === "signup") return <AuthPage />;
+  if (page === "error") return <ErrorPage />;
+  return null;
 }
 
 export default App;

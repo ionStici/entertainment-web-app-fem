@@ -4,15 +4,12 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { Toaster } from "react-hot-toast";
 import UserProvider from "./contexts/UserContext.jsx";
-import RouterProvider from "./contexts/RouterContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider>
-      <UserProvider>
-        <App />
-        <Toaster />
-      </UserProvider>
-    </RouterProvider>
+    <UserProvider>
+      <App />
+      <Toaster />
+    </UserProvider>
   </React.StrictMode>
 );
