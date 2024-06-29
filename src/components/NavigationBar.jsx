@@ -4,7 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { ReactSVG } from "react-svg";
 import { useUser } from "../contexts/UserContext";
 import UserPopup from "./UserPopup";
-import { useRouter } from "../contexts/RouterContext";
+import { useRouter } from "../Router";
 
 const NavigationBar = function () {
   const { user, feedback, handleFeedback } = useUser();

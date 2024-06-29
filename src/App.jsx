@@ -1,23 +1,12 @@
-import { useRouter } from "./contexts/RouterContext";
-import HomePage from "./pages/HomePage";
-import MoviesPage from "./pages/MoviesPage";
-import SeriesPage from "./pages/SeriesPage";
-import BookmarksPage from "./pages/BookmarksPage";
-import SearchPage from "./pages/SearchPage";
-import ErrorPage from "./pages/ErrorPage";
-import AuthPage from "./pages/AuthPage";
+import { useRouter } from "./Router";
+import { Fragment } from "react";
 
 function App() {
-  const { page } = useRouter();
+  const { page, router } = useRouter();
 
-  if (page === "home") return <HomePage />;
-  if (page === "movies") return <MoviesPage />;
-  if (page === "series") return <SeriesPage />;
-  if (page === "bookmarks") return <BookmarksPage />;
-  if (page === "search") return <SearchPage />;
-  if (page === "login" || page === "signup") return <AuthPage />;
-  if (page === "error") return <ErrorPage />;
-  return null;
+  return router.map(({ path, Component }) => {
+    if (path === page) return <Fragment key={path}>{Component}</Fragment>;
+  });
 }
 
 export default App;

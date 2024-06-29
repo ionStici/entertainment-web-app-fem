@@ -3,8 +3,7 @@ import styles from "./../styles/AuthPage.module.scss";
 import ErrorMessage from "../ui/ErrorMessage";
 import { useEffect } from "react";
 import { useUser } from "../contexts/UserContext";
-
-import { useRouter } from "../contexts/RouterContext";
+import { useRouter } from "../Router";
 
 function LoginPage() {
   const { page, goHome, goLogin, goSignup } = useRouter();

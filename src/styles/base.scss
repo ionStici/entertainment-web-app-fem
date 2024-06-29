@@ -64,34 +64,3 @@ main {
 .hidden {
   overflow: hidden;
 }
-
-.error {
-  text-align: center;
-  padding: 100px 10px;
-
-  h1 {
-    font-size: 46px;
-    margin-bottom: 16px;
-  }
-
-  p {
-    font-size: 30px;
-    margin-bottom: 30px;
-  }
-
-  button {
-    color: var(--color-red);
-    font-size: 24px;
-    letter-spacing: 1px;
-
-    display: flex;
-    margin: 0 auto;
-    background-color: transparent;
-    text-decoration: underline;
-    border: none;
-
-    &:hover {
-      text-decoration: none;
-    }
-  }
-}

@@ -1,5 +1,5 @@
 import styles from "./../styles/SearchBar.module.scss";
-import { useRouter } from "../contexts/RouterContext";
+import { useRouter } from "../Router";
 
 const SearchBar = function ({ focus = false, query, setQuery }) {
   const { goSearch } = useRouter();
