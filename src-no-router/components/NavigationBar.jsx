@@ -4,7 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { ReactSVG } from "react-svg";
 import { useUser } from "../contexts/UserContext";
 import UserPopup from "./UserPopup";
-import { Link, useRouter } from "../Router";
+import { useRouter } from "../Router";
 
 const NavigationBar = function () {
   const { user, feedback, handleFeedback } = useUser();
@@ -15,7 +15,7 @@ const NavigationBar = function () {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const { currentPath, paths, goHome, goLogin } = useRouter();
+  const { page: currentPage, goHome, goLogin, goTo } = useRouter();
 
   const handleProfileClick = () => {
     if (!user) goLogin();
@@ -23,10 +23,10 @@ const NavigationBar = function () {
   };
 
   const pages = [
-    { page: paths.home, icon: "assets/icon-nav-home.svg" },
-    { page: paths.movies, icon: "assets/icon-nav-movies.svg" },
-    { page: paths.series, icon: "assets/icon-nav-tv-series.svg" },
-    { page: paths.bookmarks, icon: "assets/icon-nav-bookmark.svg" },
+    { page: "home", icon: "assets/icon-nav-home.svg" },
+    { page: "movies", icon: "assets/icon-nav-movies.svg" },
+    { page: "series", icon: "assets/icon-nav-tv-series.svg" },
+    { page: "bookmarks", icon: "assets/icon-nav-bookmark.svg" },
   ];
 
   return (
@@ -41,9 +41,9 @@ const NavigationBar = function () {
         <div className={styles.btns_wrapper}>
           {pages.map(({ page, icon }) => {
             return (
-              <Link key={page} to={page} className={`${styles.btn} ${currentPath === page ? `${styles.active}` : ""}`}>
+              <button key={page} onClick={() => goTo(page)} className={`${styles.btn} ${currentPage === page ? `${styles.active}` : ""}`}>
                 <ReactSVG src={icon} />
-              </Link>
+              </button>
             );
           })}
         </div>
