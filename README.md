@@ -2,8 +2,8 @@
 
 This is a solution to the [Entertainment web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/entertainment-web-app-J-UhgAW1X).
 
-| [Project Demo with React Router](https://entertainment-web-app-fem.netlify.app) | [Solution on Frontend Mentor](https://www.frontendmentor.io/solutions/entertainment-web-app-eeRlZ_nT75) | [Project Demo on GitHub Pages](https://ionstici.dev/entertainment-web-app-fem/) |
-| :-----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: |
+| [Solution on Frontend Mentor](https://www.frontendmentor.io/solutions/entertainment-web-app-eeRlZ_nT75) | [Project Demo on GitHub Pages](https://ionstici.dev/entertainment-web-app-fem/) |
+| :-----------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: |
 
 This project is a responsive web application for browsing and bookmarking movies and TV series. It features a modern UI with animations and popups, built using a variety of libraries and tools. Users can log in and log out, add or remove bookmarks, and search dynamically for titles. The project uses a fake authentication system that operates solely on the frontend.
 
