@@ -1,80 +1,45 @@
-import { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { createContext, useContext, useState } from "react";
 
-const repoName = "/entertainment-web-app-fem";
+import HomePage from "./pages/HomePage";
+import MoviesPage from "./pages/MoviesPage";
+import SeriesPage from "./pages/SeriesPage";
+import BookmarksPage from "./pages/BookmarksPage";
+import SearchPage from "./pages/SearchPage";
+import AuthPage from "./pages/AuthPage";
 
-export const paths = {
-  home: repoName + "/",
-  movies: repoName + "/movies",
-  series: repoName + "/series",
-  bookmarks: repoName + "/bookmarks",
-  search: repoName + "/search",
-  login: repoName + "/login",
-  signup: repoName + "/signup",
-};
+const router = [
+  { path: "home", Component: <HomePage /> },
+  { path: "movies", Component: <MoviesPage /> },
+  { path: "series", Component: <SeriesPage /> },
+  { path: "bookmarks", Component: <BookmarksPage /> },
+  { path: "search", Component: <SearchPage /> },
+  { path: "login", Component: <AuthPage /> },
+  { path: "signup", Component: <AuthPage /> },
+];
 
 const RouterContext = createContext();
 
-export default function RouterProvider({ router = [], Layout = ({ children }) => <>{children}</> }) {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+export default function RouterProvider({ children }) {
+  const [page, setPage] = useState("home");
 
-  const navigate = useCallback((to) => {
-    window.history.pushState({}, "", to);
-    const locationChange = new PopStateEvent("navigate");
-    window.dispatchEvent(locationChange);
-    setCurrentPath(to);
-  }, []);
-
-  useEffect(() => {
-    const handleNavigate = () => setCurrentPath(window.location.pathname);
-
-    window.addEventListener("popstate", handleNavigate);
-    window.addEventListener("navigate", handleNavigate);
-
-    return () => {
-      window.removeEventListener("popstate", handleNavigate);
-      window.removeEventListener("navigate", handleNavigate);
-    };
-  }, []);
-
-  const is404 = !router.some(({ path }) => currentPath === path);
-
-  const goHome = () => navigate(paths.home);
-  const goSearch = () => navigate(paths.search);
-  const goLogin = () => navigate(paths.login);
-  const goSignup = () => navigate(paths.signup);
+  const goHome = () => setPage("home");
+  const goMovies = () => setPage("movies");
+  const goSeries = () => setPage("series");
+  const goBookmarks = () => setPage("bookmarks");
+  const goSearch = () => setPage("search");
+  const goLogin = () => setPage("login");
+  const goSignup = () => setPage("signup");
+  const goTo = (to) => setPage(to);
 
   return (
-    <RouterContext.Provider value={{ currentPath, paths, navigate, goHome, goSearch, goLogin, goSignup }}>
-      <Layout>
-        {router.map(({ path, render: Component }, i) => {
-          return currentPath === path ? <Component key={i} /> : null;
-        })}
-        {is404 && router.find(({ path }) => path === "*")?.render()}
-      </Layout>
+    <RouterContext.Provider value={{ router, page, goTo, goHome, goMovies, goSeries, goBookmarks, goSearch, goLogin, goSignup }}>
+      {children}
     </RouterContext.Provider>
   );
 }
 
 export function useRouter() {
   const context = useContext(RouterContext);
-  if (!context) throw new Error("useRouter must be used within RouterProvider");
+  if (!context) throw new Error("Router Context Error");
   return context;
-}
-
-export function Link({ children, to, className }) {
-  const { navigate } = useRouter();
-
-  const handleClick = useCallback(
-    (e) => {
-      e.preventDefault();
-      navigate(to);
-    },
-    [navigate, to]
-  );
-
-  return (
-    <a href={to} onClick={handleClick} className={className}>
-      {children}
-    </a>
-  );
 }

@@ -6,8 +6,8 @@ import { useUser } from "../contexts/UserContext";
 import { useRouter } from "../Router";
 
 function LoginPage() {
-  const { page, goHome, goLogin, goSignup } = useRouter();
-  const isLogin = page === "login";
+  const { currentPath, paths, goHome, goLogin, goSignup } = useRouter();
+  const isLogin = currentPath === paths.login;
 
   const { user, login, signUp, isLoading, feedback, error, handleError, handleFeedback } = useUser();
 
