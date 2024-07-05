@@ -1,22 +1,22 @@
-import RouterProvider, { paths } from "./Router";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import MoviesPage from "./pages/MoviesPage";
 import SeriesPage from "./pages/SeriesPage";
 import BookmarksPage from "./pages/BookmarksPage";
 import SearchPage from "./pages/SearchPage";
-import AuthPage from "./pages/AuthPage";
 import ErrorPage from "./pages/ErrorPage";
+import AuthPage from "./pages/AuthPage";
 
-const router = [
-  { path: paths.home, render: HomePage },
-  { path: paths.movies, render: MoviesPage },
-  { path: paths.series, render: SeriesPage },
-  { path: paths.bookmarks, render: BookmarksPage },
-  { path: paths.search, render: SearchPage },
-  { path: paths.login, render: AuthPage },
-  { path: paths.signup, render: AuthPage },
-  { path: "*", render: ErrorPage },
-];
+const router = createBrowserRouter([
+  { path: "/", element: <HomePage />, errorElement: <ErrorPage /> },
+  { path: "/home", element: <HomePage /> },
+  { path: "/movies", element: <MoviesPage /> },
+  { path: "/series", element: <SeriesPage /> },
+  { path: "/bookmarks", element: <BookmarksPage /> },
+  { path: "/search", element: <SearchPage /> },
+  { path: "/login", element: <AuthPage /> },
+  { path: "/signup", element: <AuthPage /> },
+]);
 
 function App() {
   return <RouterProvider router={router} />;

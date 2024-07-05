@@ -1,10 +1,10 @@
 import styles from "./../styles/NavigationBar.module.scss";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { ReactSVG } from "react-svg";
 import { useUser } from "../contexts/UserContext";
 import UserPopup from "./UserPopup";
-import { Link, useRouter } from "../Router";
 
 const NavigationBar = function () {
   const { user, feedback, handleFeedback } = useUser();
@@ -15,7 +15,8 @@ const NavigationBar = function () {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const { currentPath, paths, goHome, goLogin } = useRouter();
+  const navigate = useNavigate();
+  const goLogin = () => navigate("/login");
 
   const handleProfileClick = () => {
     if (!user) goLogin();
@@ -23,10 +24,10 @@ const NavigationBar = function () {
   };
 
   const pages = [
-    { page: paths.home, icon: "assets/icon-nav-home.svg" },
-    { page: paths.movies, icon: "assets/icon-nav-movies.svg" },
-    { page: paths.series, icon: "assets/icon-nav-tv-series.svg" },
-    { page: paths.bookmarks, icon: "assets/icon-nav-bookmark.svg" },
+    { page: "/home", icon: "assets/icon-nav-home.svg" },
+    { page: "/movies", icon: "assets/icon-nav-movies.svg" },
+    { page: "/series", icon: "assets/icon-nav-tv-series.svg" },
+    { page: "/bookmarks", icon: "assets/icon-nav-bookmark.svg" },
   ];
 
   return (
@@ -34,16 +35,16 @@ const NavigationBar = function () {
       {isOpen && <UserPopup setIsOpen={setIsOpen} />}
 
       <div className={styles.wrapper}>
-        <button className={styles.logo_link} onClick={goHome}>
+        <Link className={styles.logo_link} to="/home">
           <img src={"assets/logo.svg"} alt="logo" />
-        </button>
+        </Link>
 
         <div className={styles.btns_wrapper}>
           {pages.map(({ page, icon }) => {
             return (
-              <Link key={page} to={page} className={`${styles.btn} ${currentPath === page ? `${styles.active}` : ""}`}>
+              <NavLink to={page} key={page} className={({ isActive }) => (isActive ? `${styles.btn} ${styles.active}` : `${styles.btn}`)}>
                 <ReactSVG src={icon} />
-              </Link>
+              </NavLink>
             );
           })}
         </div>

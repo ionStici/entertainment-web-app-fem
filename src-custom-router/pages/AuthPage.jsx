@@ -1,16 +1,13 @@
 import { useForm } from "react-hook-form";
 import styles from "./../styles/AuthPage.module.scss";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import ErrorMessage from "../ui/ErrorMessage";
 import { useEffect } from "react";
 import { useUser } from "../contexts/UserContext";
+import { useRouter } from "../Router";
 
 function LoginPage() {
-  const { pathname: path } = useLocation();
-  const isLogin = path === "/login";
-
-  const navigate = useNavigate();
-  const goHome = () => navigate("/home");
+  const { currentPath, paths, goHome, goLogin, goSignup } = useRouter();
+  const isLogin = currentPath === paths.login;
 
   const { user, login, signUp, isLoading, feedback, error, handleError, handleFeedback } = useUser();
 
@@ -43,9 +40,9 @@ function LoginPage() {
 
   return (
     <section className={styles.section}>
-      <Link className={styles.logo_box} to="/home">
+      <button className={styles.logo_box} onClick={goHome}>
         <img src="assets/logo.svg" />
-      </Link>
+      </button>
 
       <div className={styles.form_wrapper}>
         <h1>{isLogin ? "Login" : "Sign Up"}</h1>
@@ -135,7 +132,7 @@ function LoginPage() {
 
         <div className={styles.text_box}>
           <p>{isLogin ? "Don’t have an account?" : "Already have an account?"}</p>
-          <Link to={isLogin ? "/signup" : "/login"}>{isLogin ? "Sign Up" : "Login"}</Link>
+          <button onClick={() => (isLogin ? goSignup() : goLogin())}>{isLogin ? "Sign Up" : "Login"}</button>
         </div>
       </div>
     </section>

@@ -1,11 +1,12 @@
 import styles from "./../styles/SearchBar.module.scss";
-import { useRouter } from "../Router";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = function ({ focus = false, query, setQuery }) {
-  const { goSearch } = useRouter();
+  const navigate = useNavigate();
+  const goToSearch = () => navigate("/search");
 
   return (
-    <div className={styles.wrapper} onClick={goSearch}>
+    <div className={styles.wrapper} onClick={goToSearch}>
       <form onSubmit={(e) => e.preventDefault()}>
         <label className={styles.label} htmlFor="Search">
           <img className={styles.icon} src="assets/icon-search.svg" alt="Search" />

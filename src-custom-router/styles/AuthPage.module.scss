@@ -11,7 +11,10 @@
 .logo_box {
   display: flex;
   text-decoration: none;
-  margin-bottom: 58px;
+
+  margin: 0 auto 58px auto;
+  background-color: transparent;
+  border: none;
 
   @media only screen and (min-width: 768px) {
     margin-bottom: 72px;
@@ -157,9 +160,10 @@
     margin-right: 10px;
   }
 
-  a,
-  a:link,
-  a:visited {
+  button {
     color: var(--color-red);
+    font-size: inherit;
+    border: none;
+    background-color: transparent;
   }
 }
